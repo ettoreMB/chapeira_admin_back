@@ -1,0 +1,17 @@
+{
+  "type": "mssql",
+  "host": "chapeira.com.br",
+  "port": 1433,
+  "username": "sa",
+  "password": "@Mepm2412",
+    "options": {
+ 
+      "trustServerCertificate": true
+    },
+  "database": "Decathlon_Chapeira_Desenv", 
+  "migrations": ["./src/database/migrations/*.ts"],
+  "entities": ["./src/modules/**/entities/*.ts"],
+  "cli": {
+    "migrationsDir": "./src/database/migrations"
+  }
+}
