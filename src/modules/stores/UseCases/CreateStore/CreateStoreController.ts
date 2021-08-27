@@ -1,44 +1,46 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
+
+import { AppErrors } from "@shared/errors/AppErrors";
+
 import { CreateStoreUseCase } from "./CreateStoreUseCase";
 
 class CreateStoreController {
-  
   async handle(req: Request, res: Response): Promise<Response> {
-    const { 
-      loja_sigla,
-      loja_nome,
-      loja_endereco,
-      loja_cidade,
-      loja_uf,
-      loja_cnpj,
-      loja_razaosocial = "IGUASPORT LTDA",
-      responsavel,
-      responsavel_email,
-      responsavel_telefone,
-      ativo, 
-      }= req.body
+    try {
+      const {
+        Loja_Sigla,
+        CNPJ,
+        Loja,
+        Loja_Endereco,
+        Loja_Cidade,
+        Loja_UF,
+        Loja_Telefone,
+        Responsavel,
+        Responsavel_Email,
+        Responsavel_Telefone,
+      } = req.body;
 
-    const createStoreUseCase = container.resolve(CreateStoreUseCase)
+      const createStoreUseCase = container.resolve(CreateStoreUseCase);
 
-    await createStoreUseCase.execute({
-      loja_sigla,
-      loja_nome,
-      loja_endereco,
-      loja_cidade,
-      loja_uf,
-      loja_cnpj,
-      loja_razaosocial,
-      responsavel,
-      responsavel_email,
-      responsavel_telefone,
-      ativo,
-    });
-    
-    return res.status(201).send();
-   
+      await createStoreUseCase.execute({
+        Loja_Sigla,
+        CNPJ,
+        Loja,
+        Loja_Endereco,
+        Loja_Cidade,
+        Loja_UF,
+        Loja_Telefone,
+        Responsavel,
+        Responsavel_Email,
+        Responsavel_Telefone,
+      });
+
+      return res.status(201).send("Loja Criada Com sucesso");
+    } catch (error) {
+      return res.send(new AppErrors("lOJA jA EXISTENTE"));
+    }
   }
 }
 
-
-export { CreateStoreController }
+export { CreateStoreController };

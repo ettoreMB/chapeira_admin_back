@@ -1,21 +1,20 @@
 import { inject, injectable } from "tsyringe";
-import { Invoice } from "../../entities/Invoice";
-import { InvoiceRepository } from "../../repositories/implementation/InvoiceRepository";
+
+import { Invoice } from "../../infra/typeorm/entities/Invoice";
+import { InvoiceRepository } from "../../infra/typeorm/repositories/InvoiceRepository";
 
 @injectable()
- class ListInvoicesUseCase {
-
+class ListInvoicesUseCase {
   constructor(
-    @inject('InvoicesRepostiory')
+    @inject("InvoicesRepostiory")
     private invoiceRepository: InvoiceRepository
-  ){}
+  ) {}
 
-  async execute():Promise<Invoice[]> {
-    const invoices =  await this.invoiceRepository.list();
+  async execute(): Promise<Invoice[]> {
+    const invoices = await this.invoiceRepository.list();
 
-    return invoices
+    return invoices;
   }
+}
 
- }
-
-export { ListInvoicesUseCase }
+export { ListInvoicesUseCase };

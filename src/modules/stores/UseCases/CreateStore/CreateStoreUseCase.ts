@@ -1,61 +1,78 @@
+import { ICreateStoreDTO } from "@modules/stores/dtos/ICreateStoreDTO";
 import { inject, injectable } from "tsyringe";
-import { AppErrors } from "../../../../errors/AppErrors";
+
+import { AppErrors } from "../../../../shared/errors/AppErrors";
 import { IStoresRepository } from "../../repositories/IStoreRepository";
 
 interface IRequest {
-  loja_sigla: string;
-  loja_nome: string;
-  loja_endereco: string;
-  loja_cidade: string;
-  loja_uf:string;
-  loja_cnpj:string;
-  loja_razaosocial: string;
-  responsavel:string;
-  responsavel_email:string;
-  responsavel_telefone:string;
-  ativo: boolean;
+  Loja_Sigla: string;
+  CNPJ: number;
+  Loja: string;
+  Loja_Endereco: string;
+  Loja_Cidade: string;
+  Loja_UF: string;
+  Loja_Telefone: string;
+  Responsavel: string;
+  Responsavel_Email: string;
+  Responsavel_Telefone: string;
 }
 
 @injectable()
 class CreateStoreUseCase {
   constructor(
-  @inject("StoresRepository")    
-    private storesRepository: IStoresRepository) {}
+    @inject("StoresRepository")
+    private storesRepository: IStoresRepository
+  ) {}
 
   async execute({
-    loja_sigla,
-    loja_nome,
-    loja_endereco,
-    loja_cidade,
-    loja_uf,
-    loja_cnpj,
-    loja_razaosocial,
-    responsavel,
-    responsavel_email,
-    responsavel_telefone,
-    ativo,
-    }: IRequest): Promise<void> {
+    Loja_Sigla,
+    CNPJ,
+    Loja,
+    Loja_Endereco,
+    Loja_Cidade,
+    Loja_UF,
+    Loja_Telefone,
+    Responsavel,
+    Responsavel_Email,
+    Responsavel_Telefone,
+  }: IRequest): Promise<void> {
+    try {
+      const storeAlreadyExistsCnpj = await this.storesRepository.findByCnpj(
+        CNPJ
+      );
 
-    const store = await this.storesRepository.findByCnpj(loja_cnpj);
+      const storeAlreadyExistsSigla = await this.storesRepository.findBySigla(
+        Loja_Sigla
+      );
 
-    if(store) {
-      throw new AppErrors('Loja Ja existe no sistema')
+      const storeAlreadyExistsName = await this.storesRepository.findByName(
+        Loja
+      );
+
+      if (
+        storeAlreadyExistsCnpj ||
+        storeAlreadyExistsSigla ||
+        storeAlreadyExistsName
+      ) {
+        throw new AppErrors("Loja já Existe no sistema");
+      }
+
+      await this.storesRepository.create({
+        Loja_Sigla,
+        CNPJ,
+        Loja,
+        Loja_Endereco,
+        Loja_Cidade,
+        Loja_UF,
+        Loja_Telefone,
+        Responsavel,
+        Responsavel_Email,
+        Responsavel_Telefone,
+      });
+    } catch (error) {
+      throw new AppErrors(error);
     }
-
-   await this.storesRepository.create({
-      loja_sigla,
-      loja_nome,
-      loja_endereco,
-      loja_cidade,
-      loja_uf,
-      loja_cnpj,
-      loja_razaosocial,
-      responsavel,
-      responsavel_email,
-      responsavel_telefone,
-      ativo,
-    });
   }
 }
 
-export { CreateStoreUseCase }
+export { CreateStoreUseCase };

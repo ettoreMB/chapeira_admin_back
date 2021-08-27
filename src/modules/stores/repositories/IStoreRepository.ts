@@ -1,12 +1,12 @@
-import { ICreateStoreDTO } from '../dtos/ICreateStoreDTO';
-import { Store } from '../entities/Store';
-
+import { ICreateStoreDTO } from "../dtos/ICreateStoreDTO";
+import { Store } from "../infra/typeorm/entities/Store";
 
 interface IStoresRepository {
   create(data: ICreateStoreDTO): Promise<void>;
-  findByCnpj(loja_cnpj: string):Promise<Store>;
-  list():Promise<Store[]>;
+  findByName(Loja: string): Promise<Store>;
+  findByCnpj(CNPJ: number): Promise<Store>;
+  findBySigla(Loja_Sigla: string): Promise<Store>;
+  list(): Promise<Store[]>;
 }
 
-
-export { IStoresRepository}
+export { IStoresRepository };

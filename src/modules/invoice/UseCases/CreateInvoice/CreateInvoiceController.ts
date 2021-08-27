@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
+
 import { CreateInvoiceUseCase } from "./CreateInvoiceUseCase";
 
 class CreateInvoiceController {
-  async handle(req: Request, res: Response):Promise<Response> {
+  async handle(req: Request, res: Response): Promise<Response> {
     const {
       Nota_Fiscal,
       loja_Sigla,
@@ -13,8 +14,8 @@ class CreateInvoiceController {
       Data_Vencimento,
     } = req.body;
 
-    const createinvoiceUseCase =  container.resolve(CreateInvoiceUseCase);
-    
+    const createinvoiceUseCase = container.resolve(CreateInvoiceUseCase);
+
     await createinvoiceUseCase.execute({
       Nota_Fiscal,
       loja_Sigla,
@@ -22,11 +23,10 @@ class CreateInvoiceController {
       Valor_Servicos,
       Valor_Nota,
       Data_Vencimento,
-    })
+    });
 
-    return res.send()
+    return res.send();
   }
-  
 }
 
-export {CreateInvoiceController}
+export { CreateInvoiceController };
