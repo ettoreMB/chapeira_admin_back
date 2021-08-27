@@ -105,6 +105,10 @@ class Store {
     if (!this.Faturar) {
       this.Faturar = true;
     }
+
+    if (!this.Razao_Social) {
+      this.Razao_Social = "IGUASPORT LTDA";
+    }
   }
 }
 
