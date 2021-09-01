@@ -10,6 +10,10 @@ class StoresRepository implements IStoresRepository {
   constructor() {
     this.repository = getRepository(Store);
   }
+  async delete(id: number): Promise<void> {
+    await this.repository.delete(id)
+    return null;
+  }
 
   async create({
     Loja_Sigla,

@@ -7,6 +7,7 @@ interface IStoresRepository {
   findByCnpj(CNPJ: number): Promise<Store>;
   findBySigla(Loja_Sigla: string): Promise<Store>;
   list(): Promise<Store[]>;
+  delete(id: number): Promise<void>;
 }
 
 export { IStoresRepository };
