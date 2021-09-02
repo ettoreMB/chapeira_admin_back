@@ -1,5 +1,3 @@
-import { DeleteResult } from "typeorm";
-
 import { ICreateStoreDTO } from "../dtos/ICreateStoreDTO";
 import { Store } from "../infra/typeorm/entities/Store";
 
