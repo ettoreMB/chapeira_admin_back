@@ -1,6 +1,6 @@
 import { ICreateStoreDTO } from "@modules/stores/dtos/ICreateStoreDTO";
 import { IStoresRepository } from "@modules/stores/repositories/IStoreRepository";
-import { getRepository, Repository } from "typeorm";
+import { DeleteResult, getRepository, Repository } from "typeorm";
 
 import { Store } from "../entities/Store";
 
@@ -10,9 +10,9 @@ class StoresRepository implements IStoresRepository {
   constructor() {
     this.repository = getRepository(Store);
   }
-  async delete(id: number): Promise<void> {
-    await this.repository.delete(id)
-    return null;
+  async delete(Loja_Sigla: string): Promise<void> {
+    const store = await this.repository.findOne({ Loja_Sigla });
+    await this.repository.remove(store);
   }
 
   async create({

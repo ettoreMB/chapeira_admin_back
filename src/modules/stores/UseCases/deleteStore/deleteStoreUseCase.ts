@@ -9,9 +9,9 @@ class DeleteStoreUseCase {
     @inject("StoresRepository")
     private storesRepository: IStoresRepository
   ) {}
-  async execute(id: number): Promise<void> {
+  async execute(Loja_Sigla: string): Promise<void> {
     try {
-      await this.storesRepository.delete(id);
+      await this.storesRepository.delete(Loja_Sigla);
     } catch (error) {
       throw new AppErrors(error);
     }
