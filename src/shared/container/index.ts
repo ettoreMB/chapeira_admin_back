@@ -19,7 +19,7 @@ container.registerSingleton<IInvoiceRepository>(
 
 // ICreateUniverse
 container.registerSingleton<IUniversesRepository>(
-  "UniversesREpository",
+  "UniversesRepository",
   UniversesRepository
 );
 

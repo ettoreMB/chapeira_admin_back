@@ -12,7 +12,7 @@ class Universe {
   id: number;
 
   @Column()
-  id_Key: string;
+  Id_Key: string;
 
   @Column()
   Loja_Sigla: string;
@@ -39,8 +39,8 @@ class Universe {
   Update_User: string;
 
   constructor() {
-    if (!this.id_Key) {
-      this.id_Key = uuidV4();
+    if (!this.Id_Key) {
+      this.Id_Key = uuidV4();
     }
   }
 }

@@ -10,6 +10,7 @@ class UniversesRepository implements IUniversesRepository {
   constructor() {
     this.repository = getRepository(Universe);
   }
+
   async create({
     Loja_Sigla,
     Universo,
@@ -24,6 +25,12 @@ class UniversesRepository implements IUniversesRepository {
     });
 
     await this.repository.save(universe);
+  }
+
+  async findBySigla(Loja_Sigla: string): Promise<Universe[]> {
+    const universes = await this.repository.find({ Loja_Sigla });
+
+    return universes;
   }
 }
 

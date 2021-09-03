@@ -1,4 +1,5 @@
 import { ICreateStoreDTO } from "@modules/stores/dtos/ICreateStoreDTO";
+import { IUniversesRepository } from "@modules/universes/repositories/IUniversesRepository";
 import { inject, injectable } from "tsyringe";
 
 import { AppErrors } from "../../../../shared/errors/AppErrors";
@@ -21,7 +22,10 @@ interface IRequest {
 class CreateStoreUseCase {
   constructor(
     @inject("StoresRepository")
-    private storesRepository: IStoresRepository
+    private storesRepository: IStoresRepository,
+
+    @inject("UniversesRepository")
+    private universesRepository: IUniversesRepository
   ) {}
 
   async execute({
@@ -68,6 +72,13 @@ class CreateStoreUseCase {
         Responsavel,
         Responsavel_Email,
         Responsavel_Telefone,
+      });
+
+      await this.universesRepository.create({
+        Universo: "Administração",
+        Zona: "0",
+        Andar: "0",
+        Loja_Sigla,
       });
     } catch (error) {
       throw new AppErrors(error);
