@@ -8,4 +8,4 @@ interface ICreateInvoiceDTO {
   Data_Pagamento?: Date;
 }
 
-export {ICreateInvoiceDTO}
+export { ICreateInvoiceDTO };

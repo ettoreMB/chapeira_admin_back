@@ -1,4 +1,4 @@
-import { ICreateInvoiceDTO } from "@modules/invoice/dto";
+import { ICreateInvoiceDTO } from "@modules/invoice/dto/ICreateInvoiceDTO";
 import { IInvoiceRepository } from "@modules/invoice/repositories/IInvoiceRepository";
 import csvParse from "csv-parse";
 import fs from "fs";
@@ -9,7 +9,7 @@ import { AppErrors } from "@shared/errors/AppErrors";
 @injectable()
 class ImportInvoiceUseCase {
   constructor(
-    @inject("InvoicesRepostiory")
+    @inject("InvoicesRepository")
     private InvoiceRepository: IInvoiceRepository
   ) {}
 
@@ -52,7 +52,7 @@ class ImportInvoiceUseCase {
   async execute(file: Express.Multer.File): Promise<void> {
     const invoices = await this.loadInvoiceFile(file);
 
-    invoices.map(async (invoice) => {
+    await invoices.map(async (invoice) => {
       const {
         loja_Sigla,
         Nota_Fiscal,
@@ -67,7 +67,7 @@ class ImportInvoiceUseCase {
       );
 
       if (!existsInvoice) {
-        this.InvoiceRepository.create({
+        await this.InvoiceRepository.create({
           loja_Sigla,
           Nota_Fiscal,
           Valor_Servicos,
@@ -76,7 +76,6 @@ class ImportInvoiceUseCase {
           Data_Vencimento,
         });
       }
-      throw new AppErrors("Chaves Duplicadas");
     });
   }
 }

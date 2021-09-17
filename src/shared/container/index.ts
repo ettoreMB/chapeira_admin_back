@@ -13,7 +13,7 @@ container.registerSingleton<IStoresRepository>(
 );
 
 container.registerSingleton<IInvoiceRepository>(
-  "InvoicesRepostiory",
+  "InvoicesRepository",
   InvoiceRepository
 );
 

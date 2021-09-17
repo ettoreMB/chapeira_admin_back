@@ -6,7 +6,7 @@ import { InvoiceRepository } from "../../infra/typeorm/repositories/InvoiceRepos
 @injectable()
 class ListInvoicesUseCase {
   constructor(
-    @inject("InvoicesRepostiory")
+    @inject("InvoicesRepository")
     private invoiceRepository: InvoiceRepository
   ) {}
 

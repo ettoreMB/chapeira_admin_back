@@ -1,4 +1,4 @@
-import { ICreateInvoiceDTO } from "../dto";
+import { ICreateInvoiceDTO } from "../dto/ICreateInvoiceDTO";
 import { Invoice } from "../infra/typeorm/entities/Invoice";
 
 interface IInvoiceRepository {

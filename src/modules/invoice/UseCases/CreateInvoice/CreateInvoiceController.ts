@@ -25,7 +25,7 @@ class CreateInvoiceController {
       Data_Vencimento,
     });
 
-    return res.send();
+    return res.status(201).send(`Created Invoice ${Nota_Fiscal}`);
   }
 }
 

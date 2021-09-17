@@ -1,4 +1,4 @@
-import { ICreateInvoiceDTO } from "@modules/invoice/dto";
+import { ICreateInvoiceDTO } from "@modules/invoice/dto/ICreateInvoiceDTO";
 import { IInvoiceRepository } from "@modules/invoice/repositories/IInvoiceRepository";
 import { getRepository, Repository } from "typeorm";
 
