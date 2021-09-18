@@ -1,7 +1,10 @@
+import { Store } from "@modules/stores/infra/typeorm/entities/Store";
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
 
@@ -12,6 +15,10 @@ class Invoice {
 
   @Column()
   Nota_Fiscal: string;
+
+  @ManyToOne(() => Store)
+  @JoinColumn({ name: "Loja_Sigla" })
+  store: Store;
 
   @Column()
   loja_Sigla: string;

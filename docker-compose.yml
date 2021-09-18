@@ -1,17 +1,17 @@
 version: "3.2"
 
 services:
-  database: 
-    image: postgres
-    container_name: database_chapeira
-    ports: 
-      - 5432:5432
-    environment:
-      - POSTGRES_USER=docker
-      - POSTGRES_PASSWORD=123
-      - POSTGRES_DB=chapeira
-    volumes:
-      - pgdata:/data/postgres
+#   database: 
+#     image: postgres
+#     container_name: database_chapeira
+#     ports: 
+#       - 5432:5432
+#     environment:
+#       - POSTGRES_USER=docker
+#       - POSTGRES_PASSWORD=123
+#       - POSTGRES_DB=chapeira
+#     volumes:
+#       - pgdata:/data/postgres
 
   app:
     build: .
@@ -22,11 +22,11 @@ services:
       - 9229:9229
     volumes: 
       - .:/usr/app
-    links: 
-      - database
-    depends_on:
-      - database
+    # links: 
+    #   - database
+    # depends_on:
+    #   - database
 
-volumes:
-  pgdata:
-    driver: local
+# volumes:
+#   pgdata:
+#     driver: local

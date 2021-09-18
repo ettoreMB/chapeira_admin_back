@@ -5,19 +5,20 @@ import { getRepository, Repository } from "typeorm";
 import { Invoice } from "../entities/Invoice";
 
 class InvoiceRepository implements IInvoiceRepository {
-  private invoices: Repository<Invoice>;
+  private repository: Repository<Invoice>;
 
   constructor() {
-    this.invoices = getRepository(Invoice);
+    this.repository = getRepository(Invoice);
   }
+
   async list(): Promise<Invoice[]> {
-    const invoices = await this.invoices.find();
+    const invoices = await this.repository.find();
 
     return invoices;
   }
 
   async findByNumber(Nota_Fiscal: string): Promise<Invoice> {
-    const invoice = await this.invoices.findOne({ Nota_Fiscal });
+    const invoice = await this.repository.findOne({ Nota_Fiscal });
 
     return invoice;
   }
@@ -30,7 +31,7 @@ class InvoiceRepository implements IInvoiceRepository {
     Data_Faturamento,
     Data_Vencimento,
   }: ICreateInvoiceDTO): Promise<void> {
-    const invoice = await this.invoices.create({
+    const invoice = await this.repository.create({
       loja_Sigla,
       Nota_Fiscal,
       Valor_Servicos,
@@ -39,7 +40,15 @@ class InvoiceRepository implements IInvoiceRepository {
       Data_Vencimento,
     });
 
-    await this.invoices.save(invoice);
+    await this.repository.save(invoice);
+  }
+
+  async findByInitial(loja_Sigla: string): Promise<Invoice[]> {
+    const invoices = await this.repository.find({
+      where: { loja_Sigla: "Loja_Sigla" },
+    });
+    console.log(invoices);
+    return invoices;
   }
 }
 
