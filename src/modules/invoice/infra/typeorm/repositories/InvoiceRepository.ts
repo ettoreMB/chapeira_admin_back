@@ -45,9 +45,8 @@ class InvoiceRepository implements IInvoiceRepository {
 
   async findByInitial(loja_Sigla: string): Promise<Invoice[]> {
     const invoices = await this.repository.find({
-      where: { loja_Sigla: "Loja_Sigla" },
+      where: { loja_Sigla },
     });
-    console.log(invoices);
     return invoices;
   }
 }

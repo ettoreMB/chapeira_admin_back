@@ -5,15 +5,13 @@ import { ListInvoicesByStoreUseCase } from "./ListInvoicesByStoreUseCase";
 
 class ListInvoiceByStoreController {
   async handle(req: Request, res: Response): Promise<Response> {
-    const { loja_Sigla } = req.params;
-    const listInvoicesByStoreUseCase = container.resolve(
-      ListInvoicesByStoreUseCase
-    );
-
-    const invoices = await listInvoicesByStoreUseCase.execute(
-      String(loja_Sigla)
-    );
-    return res.send(JSON.stringify(invoices));
+    const { sigla } = req.query;
+    console.log(sigla)
+    // const listInvoicesByStoreUseCase = container.resolve(
+    //   ListInvoicesByStoreUseCase
+    // );
+    // const invoices = await listInvoicesByStoreUseCase.execute(sigla);
+    return res.json(req.query)
   }
 }
 

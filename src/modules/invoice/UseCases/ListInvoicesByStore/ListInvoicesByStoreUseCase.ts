@@ -17,7 +17,6 @@ class ListInvoicesByStoreUseCase {
     if (!store) {
       throw new AppErrors("Store Not Found");
     }
-    console.log(store);
     return store;
   }
 }

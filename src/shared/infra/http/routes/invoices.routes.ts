@@ -25,6 +25,6 @@ invoiceRoutes.post(
 
 invoiceRoutes.get("/", listInvoicesController.handle);
 
-invoiceRoutes.get("/:Loja_Sigla", listInvoicesByStore.handle);
+invoiceRoutes.get("/", listInvoicesByStore.handle);
 
 export { invoiceRoutes };
