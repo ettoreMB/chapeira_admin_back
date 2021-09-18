@@ -25,6 +25,6 @@ invoiceRoutes.post(
 
 invoiceRoutes.get("/", listInvoicesController.handle);
 
-invoiceRoutes.get("/", listInvoicesByStore.handle);
+invoiceRoutes.get("/store", listInvoicesByStore.handle);
 
 export { invoiceRoutes };

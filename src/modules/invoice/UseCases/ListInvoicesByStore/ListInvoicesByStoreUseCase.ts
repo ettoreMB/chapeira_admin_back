@@ -14,10 +14,10 @@ class ListInvoicesByStoreUseCase {
   async execute(loja_Sigla: string): Promise<Invoice[]> {
     const store = await this.invoicesRepository.findByInitial(loja_Sigla);
 
-    if (!store) {
-      throw new AppErrors("Store Not Found");
+    if (store) {
+      return store;
     }
-    return store;
+    throw new AppErrors("Store Not Found");
   }
 }
 
