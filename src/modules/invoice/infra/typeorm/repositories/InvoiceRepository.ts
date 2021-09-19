@@ -1,4 +1,5 @@
 import { ICreateInvoiceDTO } from "@modules/invoice/dto/ICreateInvoiceDTO";
+import { IUpdateInvoiceDTO } from "@modules/invoice/dto/IUpdateInvoiceDTO";
 import { IInvoiceRepository } from "@modules/invoice/repositories/IInvoiceRepository";
 import { getRepository, Repository } from "typeorm";
 
@@ -30,7 +31,7 @@ class InvoiceRepository implements IInvoiceRepository {
     Valor_Nota,
     Data_Faturamento,
     Data_Vencimento,
-  }: ICreateInvoiceDTO): Promise<void> {
+  }: ICreateInvoiceDTO): Promise<Invoice> {
     const invoice = await this.repository.create({
       loja_Sigla,
       Nota_Fiscal,
@@ -41,8 +42,13 @@ class InvoiceRepository implements IInvoiceRepository {
     });
 
     await this.repository.save(invoice);
+    return invoice;
   }
 
+  async update(data: IUpdateInvoiceDTO): Promise<Invoice> {
+    const invoice = await this.repository.save(data);
+    return invoice;
+  }
   async findByInitial(loja_Sigla: string): Promise<Invoice[]> {
     const invoices = await this.repository.find({
       where: { loja_Sigla },

@@ -2,9 +2,9 @@ import { InvoiceRepository } from "@modules/invoice/infra/typeorm/repositories/I
 import { inject, injectable } from "tsyringe";
 
 import { AppErrors } from "@shared/errors/AppErrors";
+import { Invoice } from "@modules/invoice/infra/typeorm/entities/Invoice";
 
 interface IRequest {
-  Pendente: boolean;
   Pago: boolean;
   Nota_Fiscal: string;
 }
@@ -15,18 +15,24 @@ class UpdateInvoiceStatusUseCase {
     @inject("InvoicesRepository")
     private invoicesRepository: InvoiceRepository
   ) {}
-  async execute({ Nota_Fiscal, Pendente, Pago }: IRequest): Promise<void> {
+  async execute({ Nota_Fiscal, Pago }: IRequest): Promise<Invoice> {
     const invoice = await this.invoicesRepository.findByNumber(Nota_Fiscal);
 
     if (!invoice) {
       throw new AppErrors("Invoice does not exists");
     }
 
-    invoice.Pendente = Pendente;
+    if (Pago === true) {
+      invoice.Pendente = false;
+    }
 
     invoice.Pago = Pago;
+    invoice.Nota_Fiscal = Nota_Fiscal;
+    invoice.Update_Date = new Date();
 
-    await this.invoicesRepository.create(invoice);
+    await this.invoicesRepository.update(invoice);
+
+    return invoice;
   }
 }
 

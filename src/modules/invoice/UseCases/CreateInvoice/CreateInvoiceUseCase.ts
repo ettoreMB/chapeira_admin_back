@@ -4,6 +4,7 @@ import { IStoresRepository } from "@modules/stores/repositories/IStoreRepository
 import { inject, injectable } from "tsyringe";
 
 import { AppErrors } from "@shared/errors/AppErrors";
+import { Invoice } from "@modules/invoice/infra/typeorm/entities/Invoice";
 
 @injectable()
 class CreateInvoiceUseCase {
@@ -21,7 +22,7 @@ class CreateInvoiceUseCase {
     Valor_Servicos,
     Valor_Nota,
     Data_Vencimento,
-  }: ICreateInvoiceDTO): Promise<void> {
+  }: ICreateInvoiceDTO): Promise<Invoice> {
     const store = await this.storesRepositoy.findBySigla(loja_Sigla);
 
     if (!store) {
@@ -35,7 +36,7 @@ class CreateInvoiceUseCase {
       throw new AppErrors("Invoice Already Exists");
     }
 
-    await this.InvoiceRepository.create({
+    const invoice = await this.InvoiceRepository.create({
       Nota_Fiscal,
       loja_Sigla,
       Data_Faturamento,
@@ -43,6 +44,8 @@ class CreateInvoiceUseCase {
       Valor_Nota,
       Data_Vencimento,
     });
+
+    return invoice;
   }
 }
 

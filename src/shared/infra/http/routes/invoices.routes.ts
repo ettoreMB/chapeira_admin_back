@@ -3,7 +3,6 @@ import { ImportInvoiceController } from "@modules/invoice/UseCases/ImportInvoice
 import { ListInvoicesController } from "@modules/invoice/UseCases/listInvoices/ListInvoicesController";
 import { ListInvoiceByStoreController } from "@modules/invoice/UseCases/ListInvoicesByStore/ListInvoicesByStoreController";
 import { UpdateInvoiceStatusController } from "@modules/invoice/UseCases/UpdateInvoiceStatus/UpdateInvoiceStatusController";
-
 import { Router } from "express";
 import multer from "multer";
 
@@ -30,6 +29,6 @@ invoiceRoutes.get("/", listInvoicesController.handle);
 
 invoiceRoutes.get("/store", listInvoicesByStore.handle);
 
-invoiceRoutes.patch("/:Nota_Fiscal", updateInvoiceStatusController.handle);
+invoiceRoutes.put("/:Nota_Fiscal", updateInvoiceStatusController.handle);
 
 export { invoiceRoutes };
