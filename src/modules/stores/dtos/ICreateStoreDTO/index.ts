@@ -1,5 +1,5 @@
 interface ICreateStoreDTO {
-  id?: string;
+  id?: number;
   Loja_Sigla: string;
   Loja: string;
   Loja_Endereco: string;

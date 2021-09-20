@@ -49,6 +49,7 @@ class InvoiceRepository implements IInvoiceRepository {
     const invoice = await this.repository.save(data);
     return invoice;
   }
+
   async findByInitial(loja_Sigla: string): Promise<Invoice[]> {
     const invoices = await this.repository.find({
       where: { loja_Sigla },

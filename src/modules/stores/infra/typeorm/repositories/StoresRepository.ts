@@ -1,6 +1,7 @@
 import { ICreateStoreDTO } from "@modules/stores/dtos/ICreateStoreDTO";
+import { IEditStoreDTO } from "@modules/stores/dtos/IEditStoreDTO";
 import { IStoresRepository } from "@modules/stores/repositories/IStoreRepository";
-import { DeleteResult, getRepository, Repository } from "typeorm";
+import { getRepository, Repository } from "typeorm";
 
 import { Store } from "../entities/Store";
 
@@ -10,6 +11,7 @@ class StoresRepository implements IStoresRepository {
   constructor() {
     this.repository = getRepository(Store);
   }
+
   async delete(Loja_Sigla: string): Promise<void> {
     const store = await this.repository.findOne({ Loja_Sigla });
     await this.repository.remove(store);
@@ -27,7 +29,7 @@ class StoresRepository implements IStoresRepository {
     Responsavel_Email,
     Responsavel_Telefone,
   }: ICreateStoreDTO): Promise<void> {
-    const store = this.repository.create({
+    const store = await this.repository.create({
       Loja_Sigla,
       Loja,
       Loja_Endereco,
@@ -43,8 +45,18 @@ class StoresRepository implements IStoresRepository {
       Faturamento_Telefone: Responsavel_Telefone,
       CNPJ,
     });
-
     await this.repository.save(store);
+  }
+
+  async edit(Loja_Sigla: string, data: Partial<IEditStoreDTO>): Promise<Store> {
+    const store = data;
+    await this.repository
+      .update( ,Store)
+      .set( data )
+      .where("id = :id", { id: data.id })
+      .execute();
+
+    return this.repository.findOne({ Loja_Sigla });
   }
 
   async list(): Promise<Store[]> {
