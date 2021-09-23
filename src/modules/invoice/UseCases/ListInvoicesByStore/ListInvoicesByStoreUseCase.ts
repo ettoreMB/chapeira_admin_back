@@ -11,8 +11,8 @@ class ListInvoicesByStoreUseCase {
     private invoicesRepository: IInvoiceRepository
   ) {}
 
-  async execute(loja_Sigla: string): Promise<Invoice[]> {
-    const store = await this.invoicesRepository.findByInitial(loja_Sigla);
+  async execute(Loja_Sigla: string): Promise<Invoice[]> {
+    const store = await this.invoicesRepository.findByInitial(Loja_Sigla);
 
     if (store) {
       return store;

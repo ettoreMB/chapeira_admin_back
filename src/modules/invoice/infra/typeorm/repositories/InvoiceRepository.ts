@@ -25,7 +25,7 @@ class InvoiceRepository implements IInvoiceRepository {
   }
 
   async create({
-    loja_Sigla,
+    Loja_Sigla,
     Nota_Fiscal,
     Valor_Servicos,
     Valor_Nota,
@@ -33,7 +33,7 @@ class InvoiceRepository implements IInvoiceRepository {
     Data_Vencimento,
   }: ICreateInvoiceDTO): Promise<Invoice> {
     const invoice = await this.repository.create({
-      loja_Sigla,
+      Loja_Sigla,
       Nota_Fiscal,
       Valor_Servicos,
       Valor_Nota,
@@ -50,9 +50,9 @@ class InvoiceRepository implements IInvoiceRepository {
     return invoice;
   }
 
-  async findByInitial(loja_Sigla: string): Promise<Invoice[]> {
+  async findByInitial(Loja_Sigla: string): Promise<Invoice[]> {
     const invoices = await this.repository.find({
-      where: { loja_Sigla },
+      where: { Loja_Sigla },
     });
     return invoices;
   }

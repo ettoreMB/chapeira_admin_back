@@ -7,7 +7,7 @@ class CreateInvoiceController {
   async handle(req: Request, res: Response): Promise<Response> {
     const {
       Nota_Fiscal,
-      loja_Sigla,
+      Loja_Sigla,
       Data_Faturamento,
       Valor_Servicos,
       Valor_Nota,
@@ -18,7 +18,7 @@ class CreateInvoiceController {
 
     await createinvoiceUseCase.execute({
       Nota_Fiscal,
-      loja_Sigla,
+      Loja_Sigla,
       Data_Faturamento,
       Valor_Servicos,
       Valor_Nota,

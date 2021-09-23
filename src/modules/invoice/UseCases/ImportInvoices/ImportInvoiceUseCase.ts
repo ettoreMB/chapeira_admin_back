@@ -22,7 +22,7 @@ class ImportInvoiceUseCase {
       parseFile
         .on("data", async (line) => {
           const [
-            loja_Sigla,
+            Loja_Sigla,
             Nota_Fiscal,
             Valor_Servicos,
             Valor_Nota,
@@ -31,7 +31,7 @@ class ImportInvoiceUseCase {
           ] = line;
 
           invoices.push({
-            loja_Sigla,
+            Loja_Sigla,
             Nota_Fiscal,
             Valor_Servicos,
             Valor_Nota,
@@ -54,7 +54,7 @@ class ImportInvoiceUseCase {
 
     await invoices.map(async (invoice) => {
       const {
-        loja_Sigla,
+        Loja_Sigla,
         Nota_Fiscal,
         Valor_Servicos,
         Valor_Nota,
@@ -68,7 +68,7 @@ class ImportInvoiceUseCase {
 
       if (!existsInvoice) {
         await this.InvoiceRepository.create({
-          loja_Sigla,
+          Loja_Sigla,
           Nota_Fiscal,
           Valor_Servicos,
           Valor_Nota,

@@ -1,5 +1,5 @@
 interface IUpdateInvoiceDTO {
-  loja_Sigla?: string;
+  Loja_Sigla?: string;
   Nota_Fiscal?: string;
   Data_Faturamento?: Date;
   Valor_Servicos?: number;

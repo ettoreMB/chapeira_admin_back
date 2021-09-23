@@ -17,6 +17,6 @@ storeRoutes.post("/", createStoreController.handle);
 storeRoutes.get("/", listStoresController.handle);
 storeRoutes.get("/:sigla", getStoreBySiglaController.handle);
 storeRoutes.delete("/:sigla", deleteStoreController.handle);
-storeRoutes.put("/edit/:sigla", editStoreController.handle);
+storeRoutes.put("/edit/:id", editStoreController.handle);
 
 export { storeRoutes };

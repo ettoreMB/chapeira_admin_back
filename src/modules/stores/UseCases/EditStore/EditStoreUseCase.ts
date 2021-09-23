@@ -5,25 +5,6 @@ import { inject, injectable } from "tsyringe";
 
 import { AppErrors } from "@shared/errors/AppErrors";
 
-interface IRequest {
-  Loja_Sigla: string;
-  data: {
-    Loja: string;
-    Loja_Endereco: string;
-    Loja_Cidade: string;
-    Loja_UF: string;
-    Loja_Telefone?: string;
-    Responsavel: string;
-    Responsavel_Email: string;
-    Responsavel_Telefone: string;
-    Adm_Email?: string;
-    Faturamento_Responsavel?: string;
-    Faturamento_Telefone?: string;
-    Faturamento_Email?: string;
-    CNPJ: number;
-  };
-}
-
 @injectable()
 class EditStoreUseCase {
   constructor(
@@ -31,14 +12,14 @@ class EditStoreUseCase {
     private storesRepository: IStoresRepository
   ) {}
 
-  async execute({ Loja_Sigla, data }: IRequest): Promise<Store> {
-    const store = await this.storesRepository.findBySigla(Loja_Sigla);
+  async execute({ id, data }): Promise<Store> {
+    const store = await this.storesRepository.findById(id);
 
     if (!store) {
       throw new AppErrors("Store not exists");
     }
 
-    await this.storesRepository.edit(Loja_Sigla, data);
+    await this.storesRepository.edit(id, data);
 
     return store;
   }

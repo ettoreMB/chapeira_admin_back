@@ -19,7 +19,7 @@ export class CreateInvoice1625022110326 implements MigrationInterface {
             generationStrategy: "increment",
           },
           {
-            name: "loja_Sigla",
+            name: "Loja_Sigla",
             type: "varchar",
           },
           {
@@ -72,8 +72,8 @@ export class CreateInvoice1625022110326 implements MigrationInterface {
     await queryRunner.createForeignKey(
       "faturas",
       new TableForeignKey({
-        columnNames: ["loja_Sigla"],
-        referencedColumnNames: ["loja_sigla"],
+        columnNames: ["Loja_Sigla"],
+        referencedColumnNames: ["Loja_Sigla"],
         referencedTableName: "lojas",
         onDelete: "CASCADE",
       })
@@ -83,7 +83,7 @@ export class CreateInvoice1625022110326 implements MigrationInterface {
   public async down(queryRunner: QueryRunner): Promise<void> {
     const table = await queryRunner.getTable("faturas");
     const foreignKey = table.foreignKeys.find(
-      (fk) => fk.columnNames.indexOf("loja_Sigla") !== -1
+      (fk) => fk.columnNames.indexOf("Loja_Sigla") !== -1
     );
     await queryRunner.dropForeignKey("faturas", foreignKey);
     await queryRunner.dropTable("faturas");

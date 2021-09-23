@@ -17,13 +17,13 @@ class CreateInvoiceUseCase {
 
   async execute({
     Nota_Fiscal,
-    loja_Sigla,
+    Loja_Sigla,
     Data_Faturamento,
     Valor_Servicos,
     Valor_Nota,
     Data_Vencimento,
   }: ICreateInvoiceDTO): Promise<Invoice> {
-    const store = await this.storesRepositoy.findBySigla(loja_Sigla);
+    const store = await this.storesRepositoy.findBySigla(Loja_Sigla);
 
     if (!store) {
       throw new AppErrors("Store Initials non exists");
@@ -38,7 +38,7 @@ class CreateInvoiceUseCase {
 
     const invoice = await this.InvoiceRepository.create({
       Nota_Fiscal,
-      loja_Sigla,
+      Loja_Sigla,
       Data_Faturamento,
       Valor_Servicos,
       Valor_Nota,

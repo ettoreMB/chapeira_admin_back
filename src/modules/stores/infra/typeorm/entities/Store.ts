@@ -1,11 +1,17 @@
+import { Invoice } from "@modules/invoice/infra/typeorm/entities/Invoice";
 import {
   Column,
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
+  ManyToMany,
+  OneToMany,
+  JoinColumn,
+  JoinTable,
+  ManyToOne,
 } from "typeorm";
 
-@Entity("tb_lojas")
+@Entity("tb_Lojas")
 class Store {
   @PrimaryGeneratedColumn()
   id: number;
@@ -97,11 +103,10 @@ class Store {
   @Column()
   Update_User: Date;
 
-  constructor() {
-    if (!this.Ativo) {
-      this.Ativo = "Sim";
-    }
+  @OneToMany((type) => Invoice, (invoice) => invoice.storeInvoices)
+  invoices: Invoice[];
 
+  constructor() {
     if (!this.Faturar) {
       this.Faturar = true;
     }

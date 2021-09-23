@@ -4,12 +4,16 @@
   "port": 1433,
   "username": "sa",
   "password": "@Mepm2412",
-    "options": {
-      "trustServerCertificate": true
-    },
-  "database": "Decathlon_Chapeira_Desenv", 
-  "migrations": ["./src/shared/infra/typeorm/migrations/*.ts"],
-    "entities": ["./src/modules/**/infra/typeorm/entities/*.ts"],
+  "options": {
+    "trustServerCertificate": true
+  },
+  "database": "Decathlon_Chapeira_Desenv",
+  "migrations": [
+    "./src/shared/infra/typeorm/migrations/*.ts"
+  ],
+  "entities": [
+    "./src/modules/**/infra/typeorm/entities/*.ts"
+  ],
   "cli": {
     "migrationsDir": "./src/shared/infra/typeorm/migrations"
   }

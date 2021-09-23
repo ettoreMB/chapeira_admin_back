@@ -4,7 +4,9 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  JoinTable,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 
@@ -16,12 +18,8 @@ class Invoice {
   @Column()
   Nota_Fiscal: string;
 
-  @ManyToOne(() => Store)
-  @JoinColumn({ name: "Loja_Sigla" })
-  store: Store;
-
   @Column()
-  loja_Sigla: string;
+  Loja_Sigla: string;
 
   @Column()
   Data_Faturamento: Date;
@@ -58,6 +56,10 @@ class Invoice {
 
   @CreateDateColumn()
   Update_Date: Date;
+
+  @ManyToOne((type) => Store, (store) => store.Loja_Sigla)
+  @JoinColumn({ name: "loja_Sigla", referencedColumnName: "Loja_Sigla" })
+  storeInvoices: Store;
 }
 
 export { Invoice };

@@ -28,9 +28,10 @@ class StoresRepository implements IStoresRepository {
     Responsavel,
     Responsavel_Email,
     Responsavel_Telefone,
-  }: ICreateStoreDTO): Promise<void> {
-    const store = await this.repository.create({
+  }: ICreateStoreDTO): Promise<Store> {
+    const store = this.repository.create({
       Loja_Sigla,
+      CNPJ,
       Loja,
       Loja_Endereco,
       Loja_Cidade,
@@ -43,20 +44,30 @@ class StoresRepository implements IStoresRepository {
       Faturamento_Responsavel: Responsavel,
       Faturamento_Email: Responsavel_Email,
       Faturamento_Telefone: Responsavel_Telefone,
-      CNPJ,
     });
     await this.repository.save(store);
+
+    return store;
   }
 
-  async edit(Loja_Sigla: string, data: Partial<IEditStoreDTO>): Promise<Store> {
-    const store = data;
-    await this.repository
-      .update( ,Store)
-      .set( data )
-      .where("id = :id", { id: data.id })
-      .execute();
+  async edit(id: number, data: IEditStoreDTO): Promise<Store> {
+    await this.repository.update(id, {
+      Loja: data.Loja,
+      Loja_Endereco: data.Loja_Endereco,
+      Loja_Cidade: data.Loja_Cidade,
+      Loja_UF: data.Loja_UF,
+      Loja_Telefone: data.Loja_Telefone,
+      Responsavel: data.Responsavel,
+      Responsavel_Email: data.Responsavel_Email,
+      Responsavel_Telefone: data.Responsavel_Telefone,
+      Adm_Email: data.Responsavel_Email,
+      Faturamento_Responsavel: data.Responsavel,
+      Faturamento_Email: data.Responsavel_Email,
+      Faturamento_Telefone: data.Responsavel_Telefone,
+      CNPJ: data.CNPJ,
+    });
 
-    return this.repository.findOne({ Loja_Sigla });
+    return this.repository.findOne({ id });
   }
 
   async list(): Promise<Store[]> {
@@ -76,8 +87,19 @@ class StoresRepository implements IStoresRepository {
     return store;
   }
 
-  async findBySigla(Loja_Sigla: string): Promise<Store> {
-    const store = await this.repository.findOne({ Loja_Sigla });
+  async findBySigla(Loja_Sigla: string): Promise<Store[]> {
+    const store = await this.repository.find({
+      where: { Loja_Sigla },
+      relations: ["invoices"],
+    });
+
+    return store;
+  }
+
+  async findById(id: number): Promise<Store> {
+    const store = await this.repository.findOne({
+      where: { id },
+    });
 
     return store;
   }

@@ -14,7 +14,7 @@ export class createStore1624459999511 implements MigrationInterface {
             generationStrategy: "increment",
           },
           {
-            name: "loja_sigla",
+            name: "Loja_Sigla",
             type: "varchar",
             isUnique: true,
           },
