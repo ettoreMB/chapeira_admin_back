@@ -9,7 +9,7 @@ class ListStoresUseCase {
   constructor(
     @inject("StoresRepository")
     private storesStoreUseCase: IStoresRepository
-  ) {}
+  ) { }
   async execute(): Promise<Store[]> {
     try {
       const stores = await this.storesStoreUseCase.list();
