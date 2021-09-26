@@ -1,4 +1,4 @@
-import { IStoresDashBoardRepository } from "@modules/stores/repositories/StoresDashBoardRepository";
+import { IStoresDashBoardRepository } from "@modules/stores/repositories/IStoresDashBoardRepository";
 import { inject, injectable } from "tsyringe";
 
 import { AppErrors } from "@shared/errors/AppErrors";
@@ -8,7 +8,7 @@ class StoreDashBoardUseCase {
   constructor(
     @inject("StoresDashBoardRepository")
     private storesDashBoardUseCase: IStoresDashBoardRepository
-  ) { }
+  ) {}
   async execute(): Promise<any> {
     try {
       const stores = await this.storesDashBoardUseCase.list();

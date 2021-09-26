@@ -3,7 +3,7 @@ import { IInvoiceRepository } from "@modules/invoice/repositories/IInvoiceReposi
 import { StoresDashBoardRepository } from "@modules/stores/infra/typeorm/repositories/StoresDashBoardRepository";
 import { StoresRepository } from "@modules/stores/infra/typeorm/repositories/StoresRepository";
 import { IStoresRepository } from "@modules/stores/repositories/IStoreRepository";
-import { IStoresDashBoardRepository } from "@modules/stores/repositories/StoresDashBoardRepository";
+import { IStoresDashBoardRepository } from "@modules/stores/repositories/IStoresDashBoardRepository";
 import { UniversesRepository } from "@modules/universes/infra/typeorm/repositories/UniversesRepository";
 import { IUniversesRepository } from "@modules/universes/repositories/IUniversesRepository";
 import { UsersRepository } from "@modules/users/infra/typeorm/repositories/UsersRepository";
