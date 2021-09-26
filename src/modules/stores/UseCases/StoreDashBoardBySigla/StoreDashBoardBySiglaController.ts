@@ -5,8 +5,8 @@ import { StoreDashBoardBySiglaUseCase } from "./StoreDashBoardBySiglaUSeCase";
 
 class StoreDashBoardBySiglaController {
   async handle(req: Request, res: Response): Promise<Response> {
-    const { sigla } = req.params;
-    console.log(sigla);
+    const { sigla: loja_Sigla } = req.params;
+
     const storeDashBoardBySiglaUseCase = container.resolve(
       StoreDashBoardBySiglaUseCase
     );
