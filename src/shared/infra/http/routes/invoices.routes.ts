@@ -27,7 +27,7 @@ invoiceRoutes.post(
 
 invoiceRoutes.get("/", listInvoicesController.handle);
 
-invoiceRoutes.get("/:store", listInvoicesByStore.handle);
+invoiceRoutes.get("/store", listInvoicesByStore.handle);
 
 invoiceRoutes.put("/:Nota_Fiscal", updateInvoiceStatusController.handle);
 

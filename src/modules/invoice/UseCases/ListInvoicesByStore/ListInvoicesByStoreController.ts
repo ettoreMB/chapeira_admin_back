@@ -5,14 +5,12 @@ import { ListInvoicesByStoreUseCase } from "./ListInvoicesByStoreUseCase";
 
 class ListInvoiceByStoreController {
   async handle(req: Request, res: Response): Promise<Response> {
-    const { sigla: Loja_Sigla } = req.query;
+    const { sigla } = req.query;
 
     const listInvoicesByStoreUseCase = container.resolve(
       ListInvoicesByStoreUseCase
     );
-    const invoices = await listInvoicesByStoreUseCase.execute(
-      String(Loja_Sigla)
-    );
+    const invoices = await listInvoicesByStoreUseCase.execute(String(sigla));
     return res.send(JSON.stringify(invoices));
   }
 }

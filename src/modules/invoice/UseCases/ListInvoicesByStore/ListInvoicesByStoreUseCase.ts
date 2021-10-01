@@ -14,16 +14,15 @@ class ListInvoicesByStoreUseCase {
     private storesRepository: IStoresRepository
   ) { }
 
-  async execute(Loja_Sigla: string): Promise<Invoice[]> {
-    const store = await this.storesRepository.findBySigla(Loja_Sigla);
+  async execute(sigla: string): Promise<Invoice[]> {
+    const invoice = await this.invoicesRepository.findByInitial(sigla);
 
-    if (!store) {
-      throw new AppErrors("Store does not exists!!");
+    if (sigla === "") {
+      const invoices = await this.invoicesRepository.list();
+      return invoices;
     }
 
-    const invoices = await this.invoicesRepository.findByInitial(Loja_Sigla);
-
-    return invoices;
+    return invoice;
   }
 }
 
