@@ -103,8 +103,8 @@ class Store {
   @Column()
   Update_User: Date;
 
-  @OneToMany((type) => Invoice, (invoice) => invoice.storeInvoices)
-  invoices: Invoice[];
+  // @OneToMany((type) => Invoice, (invoice) => invoice.storeInvoices)
+  // invoices: Invoice[];
 
   constructor() {
     if (!this.Faturar) {

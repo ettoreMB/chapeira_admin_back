@@ -11,12 +11,10 @@ class GetStoreBySiglaUseCase {
     private storesRepository: IStoresRepository
   ) { }
 
-  async execute(Loja_Sigla: string): Promise<Store[]> {
+  async execute(Loja_Sigla: string): Promise<Store> {
     const store = await this.storesRepository.findBySigla(Loja_Sigla);
 
-    if (!store) {
-      throw new AppErrors("Store not Found");
-    }
+    if (!store) throw new AppErrors("Store not Found");
 
     return store;
   }

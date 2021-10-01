@@ -8,7 +8,7 @@ interface IStoresRepository {
   delete(Loja_Sigla: string): Promise<void>;
   findByName(Loja: string): Promise<Store>;
   findByCnpj(CNPJ: number): Promise<Store>;
-  findBySigla(Loja_Sigla: string): Promise<Store[]>;
+  findBySigla(Loja_Sigla: string): Promise<Store>;
   findById(id: number): Promise<Store>;
   list(): Promise<Store[]>;
 }

@@ -87,11 +87,8 @@ class StoresRepository implements IStoresRepository {
     return store;
   }
 
-  async findBySigla(Loja_Sigla: string): Promise<Store[]> {
-    const store = await this.repository.find({
-      where: { Loja_Sigla },
-      relations: ["invoices"],
-    });
+  async findBySigla(Loja_Sigla: string): Promise<Store> {
+    const store = await this.repository.findOne({ Loja_Sigla });
 
     return store;
   }
