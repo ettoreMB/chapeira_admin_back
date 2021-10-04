@@ -29,6 +29,13 @@
         "endOfLine": "auto"
       }
     ],
+    "array-bracket-spacing": [
+      "error",
+      "true",
+      {
+        "objectsInArrays": true
+      }
+    ],
     "@typescript-eslint/naming-convention": [
       "error",
       {

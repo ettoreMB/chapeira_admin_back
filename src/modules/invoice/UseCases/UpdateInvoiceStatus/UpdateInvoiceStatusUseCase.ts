@@ -14,7 +14,7 @@ class UpdateInvoiceStatusUseCase {
   constructor(
     @inject("InvoicesRepository")
     private invoicesRepository: InvoiceRepository
-  ) {}
+  ) { }
   async execute({ Nota_Fiscal, Pago }: IRequest): Promise<Invoice> {
     const invoice = await this.invoicesRepository.findByNumber(Nota_Fiscal);
 
@@ -24,13 +24,16 @@ class UpdateInvoiceStatusUseCase {
 
     if (Pago === true) {
       invoice.Pendente = false;
+    } else {
+      invoice.Pendente = true;
     }
+
 
     invoice.Pago = Pago;
     invoice.Nota_Fiscal = Nota_Fiscal;
     invoice.Update_Date = new Date();
 
-    await this.invoicesRepository.update(invoice);
+    await this.invoicesRepository.updateStatus(invoice);
 
     return invoice;
   }

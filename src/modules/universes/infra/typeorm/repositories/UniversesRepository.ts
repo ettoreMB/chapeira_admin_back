@@ -16,7 +16,7 @@ class UniversesRepository implements IUniversesRepository {
     Universo,
     Andar,
     Zona,
-  }: ICreateUniverseDTO): Promise<void> {
+  }: ICreateUniverseDTO): Promise<Universe> {
     const universe = this.repository.create({
       Loja_Sigla,
       Universo,
@@ -25,12 +25,14 @@ class UniversesRepository implements IUniversesRepository {
     });
 
     await this.repository.save(universe);
+
+    return universe;
   }
 
-  async findBySigla(Loja_Sigla: string): Promise<Universe[]> {
-    const universes = await this.repository.find({ Loja_Sigla });
+  async findById(id: number): Promise<Universe> {
+    const universe = await this.repository.findOne({ id });
 
-    return universes;
+    return universe;
   }
 }
 

@@ -3,8 +3,6 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
@@ -22,10 +20,6 @@ class User {
 
   @Column()
   id_Universo: number;
-
-  // @OneToOne(() => Universe)
-  // @JoinColumn()
-  // universe: Universe;
 
   @Column()
   Nome: string;
@@ -111,27 +105,6 @@ class User {
   @Column()
   Cor: string;
 
-  @Column()
-  Qtd_Colaborador: number;
-
-  @Column()
-  Qtd_Brigadista: number;
-
-  @Column()
-  Qtd_Terceiro: number;
-
-  @Column()
-  Qtd_Visitante: number;
-
-  @Column()
-  Qtd_Presente: number;
-
-  @Column()
-  Qtd_Ausente: number;
-
-  @Column()
-  Qtd_Ativo: number;
-
   constructor() {
     if (!this.id_Key) {
       this.id_Key = uuidV4();
@@ -146,8 +119,10 @@ class User {
     }
 
     if (!this.Status) {
-      this.Status = "Ativo";
+      this.Status = "Nao";
     }
+
+
   }
 }
 

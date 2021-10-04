@@ -1,32 +1,28 @@
   # Site Administração Chapeira (BackEnd)
 
-  ## Login
-    * Fazer Login Usuarios para acessar o sistema
-  ## Users
-    * Edição de Usuários
-    * Exclusão
-    * Listar
-    * Filtrar por loja
-    
   ## Stores
-    * Registrar
-    *Listar
-    *Editar
-    *excluir
-    * filtrar por loja
+    * Criar loja com universo e usuário adm OK
+    * Listar todas as lojas Ok
+    * Buscar Loja Sigla, cnpj OK
+    * Editar Status da loja
 
+    
+  ## Users
+    * Criação de admin ok
+    * Exclusão
+    * 
+    
    ### Equips
-    * Registrar
-    *Listar
+    * Registrar equipamento
+    *Listar equipamentos
+    *Listar equipamentos Por loja
     *Editar
-    *excluir
-    * filtrar por loja
 
   ## Invoices
-    * Criar
-    * Editar
-    * Listar
-      * Registradas / pendentes
-    * Excluir
-    * Total Faturado
+    * Criar ok
+    * Editar 
+    * Listar todas faturas ok
+    * Excluir ok
+    * Listar faturas por loja ok
+    *Mudar status ok 
     

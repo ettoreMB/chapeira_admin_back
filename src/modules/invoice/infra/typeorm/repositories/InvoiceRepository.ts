@@ -45,7 +45,12 @@ class InvoiceRepository implements IInvoiceRepository {
     return invoice;
   }
 
-  async update(data: IUpdateInvoiceDTO): Promise<Invoice> {
+  async delete(Nota_Fiscal: string): Promise<void> {
+    const invoice = await this.repository.findOne({ Nota_Fiscal })
+    await this.repository.delete(invoice)
+  }
+
+  async updateStatus(data: IUpdateInvoiceDTO): Promise<Invoice> {
     const invoice = await this.repository.save(data);
     return invoice;
   }

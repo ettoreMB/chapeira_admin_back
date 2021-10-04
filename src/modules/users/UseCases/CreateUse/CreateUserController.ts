@@ -17,7 +17,7 @@ class CreateUserController {
 
     const createUserUseCase = container.resolve(CreateUserUseCase);
 
-    createUserUseCase.execute({
+    const user = await createUserUseCase.execute({
       Loja_Sigla,
       id_Universo,
       Nome,
@@ -26,7 +26,7 @@ class CreateUserController {
       Administrador,
       Senha,
     });
-    return res.status(200).send("User Created");
+    return res.status(200).json(user);
   }
 }
 

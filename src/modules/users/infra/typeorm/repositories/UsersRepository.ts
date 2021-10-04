@@ -28,7 +28,6 @@ class UsersRepository implements IUsersRepository {
       Email,
       Administrador,
       Senha,
-      Status: "Ausente",
     });
 
     await this.repository.save(user);

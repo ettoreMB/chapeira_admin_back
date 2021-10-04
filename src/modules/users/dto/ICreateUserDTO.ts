@@ -4,6 +4,7 @@ interface ICreateUserDTO {
   Nome: string;
   Funcao: string;
   Email: string;
+  Ativo?: string;
   Administrador: string;
   Senha: string;
 }

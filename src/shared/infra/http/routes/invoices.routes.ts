@@ -1,4 +1,6 @@
+import { InvoiceRepository } from "@modules/invoice/infra/typeorm/repositories/InvoiceRepository";
 import { CreateInvoiceController } from "@modules/invoice/UseCases/CreateInvoice/CreateInvoiceController";
+import { DeleteInvoiceController } from "@modules/invoice/UseCases/DeleteInvoice/DeleteInvoiceController";
 import { ImportInvoiceController } from "@modules/invoice/UseCases/ImportInvoices/ImportInvoiceController";
 import { ListInvoicesController } from "@modules/invoice/UseCases/listInvoices/ListInvoicesController";
 import { ListInvoiceByStoreController } from "@modules/invoice/UseCases/ListInvoicesByStore/ListInvoicesByStoreController";
@@ -12,6 +14,7 @@ const upload = multer({
 const invoiceRoutes = Router();
 
 const createinvoiceController = new CreateInvoiceController();
+const deleteInvoiceController = new DeleteInvoiceController();
 const importInvoiceController = new ImportInvoiceController();
 const listInvoicesController = new ListInvoicesController();
 const listInvoicesByStore = new ListInvoiceByStoreController();
@@ -29,6 +32,8 @@ invoiceRoutes.get("/", listInvoicesController.handle);
 
 invoiceRoutes.get("/store", listInvoicesByStore.handle);
 
-invoiceRoutes.put("/:Nota_Fiscal", updateInvoiceStatusController.handle);
+invoiceRoutes.delete("/:nota", deleteInvoiceController.handle)
+
+invoiceRoutes.patch("/:Nota_Fiscal", updateInvoiceStatusController.handle);
 
 export { invoiceRoutes };

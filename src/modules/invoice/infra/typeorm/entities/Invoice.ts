@@ -57,9 +57,9 @@ class Invoice {
   @CreateDateColumn()
   Update_Date: Date;
 
-  @ManyToOne((type) => Store, (store) => store.Loja_Sigla)
-  @JoinColumn({ name: "loja_Sigla", referencedColumnName: "Loja_Sigla" })
-  storeInvoices: Store;
+  // @ManyToOne((type) => Store, (store) => store.Loja_Sigla)
+  // @JoinColumn({ name: "loja_Sigla", referencedColumnName: "Loja_Sigla" })
+  // storeInvoices: Store;
 }
 
 export { Invoice };
