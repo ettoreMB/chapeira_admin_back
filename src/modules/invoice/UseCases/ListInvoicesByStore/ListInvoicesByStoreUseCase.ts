@@ -1,5 +1,6 @@
 import { Invoice } from "@modules/invoice/infra/typeorm/entities/Invoice";
 import { IInvoiceRepository } from "@modules/invoice/repositories/IInvoiceRepository";
+import { IStoresRepository } from "@modules/stores/repositories/IStoreRepository";
 import { inject, injectable } from "tsyringe";
 
 import { AppErrors } from "@shared/errors/AppErrors";
@@ -8,16 +9,20 @@ import { AppErrors } from "@shared/errors/AppErrors";
 class ListInvoicesByStoreUseCase {
   constructor(
     @inject("InvoicesRepository")
-    private invoicesRepository: IInvoiceRepository
-  ) {}
+    private invoicesRepository: IInvoiceRepository,
+    @inject("StoresRepository")
+    private storesRepository: IStoresRepository
+  ) { }
 
-  async execute(Loja_Sigla: string): Promise<Invoice[]> {
-    const store = await this.invoicesRepository.findByInitial(Loja_Sigla);
+  async execute(sigla: string): Promise<Invoice[]> {
+    const invoice = await this.invoicesRepository.findByInitial(sigla);
 
-    if (store) {
-      return store;
+    if (sigla === "") {
+      const invoices = await this.invoicesRepository.list();
+      return invoices;
     }
-    throw new AppErrors("Store Not Found");
+
+    return invoice;
   }
 }
 
