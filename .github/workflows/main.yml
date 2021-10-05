@@ -33,7 +33,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }} 
           source: "., !node_modules"
-          target: "~app/rentx"
+          target: "~app/chapeira_adm_back"
         
       - name: Update API
         uses: appleboy/ssh-action@master
@@ -45,4 +45,3 @@ jobs:
           script: |
             cd ~/app/chapeira_admin_back
             yarn
-            pm2 restart rentxApi
