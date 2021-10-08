@@ -50,25 +50,35 @@ class StoresRepository implements IStoresRepository {
     return store;
   }
 
-  async edit(id: number, data: IEditStoreDTO): Promise<Store> {
-    await this.repository.update(id, {
-      Loja: data.Loja,
-      Loja_Endereco: data.Loja_Endereco,
-      Loja_Cidade: data.Loja_Cidade,
-      Loja_UF: data.Loja_UF,
-      Loja_Telefone: data.Loja_Telefone,
-      Responsavel: data.Responsavel,
-      Responsavel_Email: data.Responsavel_Email,
-      Responsavel_Telefone: data.Responsavel_Telefone,
-      Adm_Email: data.Responsavel_Email,
-      Faturamento_Responsavel: data.Responsavel,
-      Faturamento_Email: data.Responsavel_Email,
-      Faturamento_Telefone: data.Responsavel_Telefone,
-      CNPJ: data.CNPJ,
-    });
+  async edit({
+    id,
+    Loja,
+    CNPJ,
+    Loja_Endereco,
+    Loja_Cidade,
+    Loja_UF,
+    Loja_Telefone,
+    Responsavel,
+    Responsavel_Email,
+    Responsavel_Telefone }: IEditStoreDTO): Promise<Store> {
 
-    return this.repository.findOne({ id });
+    const store = await this.repository.findOne({ id })
+
+    return this.repository.save({
+      ...store,
+      Loja: Loja,
+      CNPJ: CNPJ,
+      Loja_Endereco: Loja_Endereco,
+      Loja_Cidade: Loja_Cidade,
+      Loja_UF: Loja_UF,
+      Loja_Telefone: Loja_Telefone,
+      Responsavel: Responsavel,
+      Responsavel_Email: Responsavel_Email,
+      Responsavel_Telefone: Responsavel_Telefone
+    })
+
   }
+
 
   async list(): Promise<Store[]> {
     const stores = await this.repository.find();

@@ -10,16 +10,37 @@ class EditStoreUseCase {
   constructor(
     @inject("StoresRepository")
     private storesRepository: IStoresRepository
-  ) {}
+  ) { }
 
-  async execute({ id, data }): Promise<Store> {
+  async execute({
+    id,
+    Loja,
+    CNPJ,
+    Loja_Endereco,
+    Loja_Cidade,
+    Loja_UF,
+    Loja_Telefone,
+    Responsavel,
+    Responsavel_Email,
+    Responsavel_Telefone }): Promise<Store> {
     const store = await this.storesRepository.findById(id);
 
     if (!store) {
       throw new AppErrors("Store not exists");
     }
 
-    await this.storesRepository.edit(id, data);
+    await this.storesRepository.edit({
+      id,
+      Loja,
+      CNPJ,
+      Loja_Endereco,
+      Loja_Cidade,
+      Loja_UF,
+      Loja_Telefone,
+      Responsavel,
+      Responsavel_Email,
+      Responsavel_Telefone
+    });
 
     return store;
   }
