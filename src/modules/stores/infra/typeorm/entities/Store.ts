@@ -82,7 +82,7 @@ class Store {
   @Column()
   Faturar: boolean;
 
-  @Column()
+  @Column("decimal", { precision: 18, scale: 0 })
   CNPJ: number;
 
   @Column()
