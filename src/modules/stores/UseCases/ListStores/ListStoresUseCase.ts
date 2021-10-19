@@ -10,9 +10,9 @@ class ListStoresUseCase {
     @inject("StoresRepository")
     private storesStoreUseCase: IStoresRepository
   ) { }
-  async execute(): Promise<Store[]> {
+  async execute(uf?: string): Promise<Store[]> {
     try {
-      const stores = await this.storesStoreUseCase.list();
+      const stores = await this.storesStoreUseCase.list(uf);
 
       return stores;
     } catch (error) {

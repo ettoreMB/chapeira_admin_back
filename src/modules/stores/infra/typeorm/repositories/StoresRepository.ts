@@ -1,7 +1,7 @@
 import { ICreateStoreDTO } from "@modules/stores/dtos/ICreateStoreDTO";
 import { IEditStoreDTO } from "@modules/stores/dtos/IEditStoreDTO";
 import { IStoresRepository } from "@modules/stores/repositories/IStoreRepository";
-import { getRepository, Repository } from "typeorm";
+import { getRepository, ILike, Repository } from "typeorm";
 
 import { Store } from "../entities/Store";
 
@@ -83,8 +83,12 @@ class StoresRepository implements IStoresRepository {
   }
 
 
-  async list(): Promise<Store[]> {
-    const stores = await this.repository.find();
+  async list(uf: string): Promise<Store[]> {
+    const stores = await this.repository.find({
+      where: [
+        { Loja_UF: ILike(`%${uf}%`) }
+      ]
+    });
     return stores;
   }
 
@@ -99,6 +103,7 @@ class StoresRepository implements IStoresRepository {
 
     return store;
   }
+
 
   async findBySigla(Loja_Sigla: string): Promise<Store> {
     const store = await this.repository.findOne({
