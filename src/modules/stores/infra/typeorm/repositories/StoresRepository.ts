@@ -73,8 +73,11 @@ class StoresRepository implements IStoresRepository {
       Loja_UF: Loja_UF,
       Loja_Telefone: Loja_Telefone,
       Responsavel: Responsavel,
+      Adm_Email: Responsavel_Email,
       Responsavel_Email: Responsavel_Email,
-      Responsavel_Telefone: Responsavel_Telefone
+      Faturamento_Responsavel: Responsavel,
+      Faturamento_Email: Responsavel_Email,
+      Faturamento_Telefone: Responsavel_Telefone,
     })
 
   }
