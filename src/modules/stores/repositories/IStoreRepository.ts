@@ -10,7 +10,7 @@ interface IStoresRepository {
   findByCnpj(CNPJ: number): Promise<Store>;
   findBySigla(Loja_Sigla: string): Promise<Store>;
   findById(id: number): Promise<Store>;
-  list(uf: string): Promise<Store[]>;
+  list(): Promise<Store[]>;
 }
 
 export { IStoresRepository };

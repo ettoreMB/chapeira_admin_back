@@ -83,12 +83,8 @@ class StoresRepository implements IStoresRepository {
   }
 
 
-  async list(uf: string): Promise<Store[]> {
-    const stores = await this.repository.find({
-      where: [
-        { Loja_UF: ILike(`%${uf}%`) }
-      ]
-    });
+  async list(): Promise<Store[]> {
+    const stores = await this.repository.find();
     return stores;
   }
 
