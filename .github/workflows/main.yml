@@ -45,4 +45,4 @@ jobs:
           script: |
             cd ~/app/chapeira_admin_back
             yarn
-            pm2 restart chapeira_back
+            pm2 restart chapeira
