@@ -7,6 +7,7 @@ import { Invoice } from "@modules/invoice/infra/typeorm/entities/Invoice";
 interface IRequest {
   Pago: boolean;
   Nota_Fiscal: string;
+  parseDate: Date;
 }
 
 @injectable()
@@ -15,7 +16,7 @@ class UpdateInvoiceStatusUseCase {
     @inject("InvoicesRepository")
     private invoicesRepository: InvoiceRepository
   ) { }
-  async execute({ Nota_Fiscal, Pago }: IRequest): Promise<Invoice> {
+  async execute({ Nota_Fiscal, Pago, parseDate }: IRequest): Promise<Invoice> {
     const invoice = await this.invoicesRepository.findByNumber(Nota_Fiscal);
 
     if (!invoice) {
@@ -31,6 +32,7 @@ class UpdateInvoiceStatusUseCase {
 
     invoice.Pago = Pago;
     invoice.Nota_Fiscal = Nota_Fiscal;
+    invoice.Data_Pagamento = parseDate;
     invoice.Update_Date = new Date();
 
     await this.invoicesRepository.updateStatus(invoice);

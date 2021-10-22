@@ -34,6 +34,6 @@ invoiceRoutes.get("/store", listInvoicesByStore.handle);
 
 invoiceRoutes.delete("/:nota", deleteInvoiceController.handle)
 
-invoiceRoutes.patch("/:Nota_Fiscal/:status", updateInvoiceStatusController.handle);
+invoiceRoutes.patch("/:Nota_Fiscal", updateInvoiceStatusController.handle);
 
 export { invoiceRoutes };

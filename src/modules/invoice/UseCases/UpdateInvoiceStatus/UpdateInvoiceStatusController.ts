@@ -5,16 +5,15 @@ import { UpdateInvoiceStatusUseCase } from "./UpdateInvoiceStatusUseCase";
 
 class UpdateInvoiceStatusController {
   async handle(req: Request, res: Response): Promise<Response> {
-    const { status } = req.params;
+    const { status, date } = req.query;
     const { Nota_Fiscal } = req.params;
 
     const updateInvoiceStatusUseCase = container.resolve(
       UpdateInvoiceStatusUseCase
     );
-
-    const Pago = (/true/i).test(status)
-    console.log(status, Pago)
-    await updateInvoiceStatusUseCase.execute({ Nota_Fiscal, Pago });
+    const parseDate = new Date(String(date))
+    const Pago = (/true/i).test(String(status))
+    await updateInvoiceStatusUseCase.execute({ Nota_Fiscal, Pago, parseDate });
 
     return res.status(201).send("Invoice Updated");
   }
