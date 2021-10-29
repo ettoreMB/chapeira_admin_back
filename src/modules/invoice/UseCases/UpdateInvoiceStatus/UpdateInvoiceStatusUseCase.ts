@@ -23,7 +23,7 @@ class UpdateInvoiceStatusUseCase {
       throw new AppErrors("Invoice does not exists");
     }
 
-    if (Pago === true) {
+    if (Pago = true) {
       invoice.Pendente = false;
     } else {
       invoice.Pendente = true;

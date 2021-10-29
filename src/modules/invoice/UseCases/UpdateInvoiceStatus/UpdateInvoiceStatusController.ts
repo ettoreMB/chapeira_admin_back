@@ -12,10 +12,10 @@ class UpdateInvoiceStatusController {
       UpdateInvoiceStatusUseCase
     );
     const parseDate = new Date(String(date))
-    const Pago = (/true/i).test(String(status))
+    let Pago = !!status
     await updateInvoiceStatusUseCase.execute({ Nota_Fiscal, Pago, parseDate });
-
-    return res.status(201).send("Invoice Updated");
+    console.log(Pago, date)
+    return res.status(201).send(`Invoice ${Nota_Fiscal} Updated`);
   }
 }
 
