@@ -34,6 +34,17 @@ class UsersRepository implements IUsersRepository {
 
     return user;
   }
+
+  async getAllBySigla(sigla?: string): Promise<User[]> {
+    const usersQuery = await this.repository.createQueryBuilder("u");
+
+    if (sigla) {
+      usersQuery.andWhere("u.Loja_Sigla = :sigla", { sigla })
+    }
+    const users = await usersQuery.getMany()
+
+    return users
+  }
 }
 
 export { UsersRepository };
