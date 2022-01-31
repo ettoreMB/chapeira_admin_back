@@ -11,6 +11,11 @@ class UsersRepository implements IUsersRepository {
     this.repository = getRepository(User);
   }
 
+  async find(id: string): Promise<User> {
+    const user = await this.repository.findOne(id)
+    return user
+  }
+
   async create({
     Loja_Sigla,
     id_Universo,
@@ -44,6 +49,16 @@ class UsersRepository implements IUsersRepository {
     const users = await usersQuery.getMany()
 
     return users
+  }
+
+  async updateAdminStatus(id: string, Administrador: string): Promise<void> {
+    await this.repository
+      .createQueryBuilder()
+      .update()
+      .set({ Administrador })
+      .where("id = :id")
+      .setParameters({ id })
+      .execute()
   }
 }
 
