@@ -1,4 +1,6 @@
 node_modules
+SendEmailInvoices
+views
 .vscode
 tmp/*
 coverage

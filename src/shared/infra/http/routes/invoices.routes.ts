@@ -4,6 +4,7 @@ import { DeleteInvoiceController } from "@modules/invoice/UseCases/DeleteInvoice
 import { ImportInvoiceController } from "@modules/invoice/UseCases/ImportInvoices/ImportInvoiceController";
 import { ListInvoicesController } from "@modules/invoice/UseCases/listInvoices/ListInvoicesController";
 import { ListInvoiceByStoreController } from "@modules/invoice/UseCases/ListInvoicesByStore/ListInvoicesByStoreController";
+import { SendEmailInvoicesController } from "@modules/invoice/UseCases/SendEmailInvoices/SendEmailInvoicesController";
 import { UpdateInvoiceStatusController } from "@modules/invoice/UseCases/UpdateInvoiceStatus/UpdateInvoiceStatusController";
 import { Router } from "express";
 import multer from "multer";
@@ -19,6 +20,9 @@ const importInvoiceController = new ImportInvoiceController();
 const listInvoicesController = new ListInvoicesController();
 const listInvoicesByStore = new ListInvoiceByStoreController();
 const updateInvoiceStatusController = new UpdateInvoiceStatusController();
+
+const sendInvoicesEmail = new SendEmailInvoicesController();
+invoiceRoutes.get("/email", sendInvoicesEmail.handle);
 
 invoiceRoutes.post("/", createinvoiceController.handle);
 
