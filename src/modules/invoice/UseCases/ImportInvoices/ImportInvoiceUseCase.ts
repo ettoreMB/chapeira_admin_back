@@ -11,7 +11,7 @@ class ImportInvoiceUseCase {
   constructor(
     @inject("InvoicesRepository")
     private InvoiceRepository: IInvoiceRepository
-  ) {}
+  ) { }
 
   loadInvoiceFile(file: Express.Multer.File): Promise<ICreateInvoiceDTO[]> {
     return new Promise((resolve, reject) => {
@@ -35,8 +35,8 @@ class ImportInvoiceUseCase {
             Nota_Fiscal,
             Valor_Servicos,
             Valor_Nota,
-            Data_Faturamento,
-            Data_Vencimento,
+            Data_Faturamento: new Date(Data_Faturamento),
+            Data_Vencimento: new Date(Data_Vencimento),
           });
         })
         .on("end", () => {
@@ -62,20 +62,21 @@ class ImportInvoiceUseCase {
         Data_Vencimento,
       } = invoice;
 
-      const existsInvoice = await this.InvoiceRepository.findByNumber(
-        Nota_Fiscal
-      );
+      console.log(invoice)
+      // const existsInvoice = await this.InvoiceRepository.findByNumber(
+      //   Nota_Fiscal
+      // );
 
-      if (!existsInvoice) {
-        await this.InvoiceRepository.create({
-          Loja_Sigla,
-          Nota_Fiscal,
-          Valor_Servicos,
-          Valor_Nota,
-          Data_Faturamento,
-          Data_Vencimento,
-        });
-      }
+      // if (!existsInvoice) {
+      //   await this.InvoiceRepository.create({
+      //     Loja_Sigla,
+      //     Nota_Fiscal,
+      //     Valor_Servicos,
+      //     Valor_Nota,
+      //     Data_Faturamento,
+      //     Data_Vencimento,
+      //   });
+      // }
     });
   }
 }

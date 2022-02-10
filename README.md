@@ -1,28 +1,8 @@
   # Site Administração Chapeira (BackEnd)
 
-  ## Stores
-    * Criar loja com universo e usuário adm OK
-    * Listar todas as lojas Ok
-    * Buscar Loja Sigla, cnpj OK
-    * Editar Status da loja
+  *  node v-14
+  * typescript
 
-    
-  ## Users
-    * Criação de admin ok
-    * Exclusão
-    * 
-    
-   ### Equips
-    * Registrar equipamento
-    *Listar equipamentos
-    *Listar equipamentos Por loja
-    *Editar
-
-  ## Invoices
-    * Criar ok
-    * Editar 
-    * Listar todas faturas ok
-    * Excluir ok
-    * Listar faturas por loja ok
-    *Mudar status ok 
-    
+  * Install dependencis npm i
+  * Run development server npm run dev
+  * Build npm run build
