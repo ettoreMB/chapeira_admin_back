@@ -16,6 +16,8 @@ services:
     expose:
       - "8080"
       - "443"
+    ports:
+      - 8080:80
     build: ./nginx-proxy
     volumes:
       - ./nginx-proxy
