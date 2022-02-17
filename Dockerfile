@@ -8,11 +8,11 @@ RUN corepack enable
 
 RUN npm i -g corepack
 
-RUN yarn isntall
+RUN yarn
 
 COPY --chown=node:node . .
 
-RUN npm run build
+RUN yarn build
 
 CMD ["yarn", "start"]
 
