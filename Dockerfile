@@ -4,7 +4,7 @@ WORKDIR /usr/app
 
 COPY package*.json ./
 
-RUN npm i
+RUN npm i --production
 
 COPY --chown=node:node . .
 
