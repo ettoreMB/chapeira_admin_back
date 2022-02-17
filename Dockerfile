@@ -8,7 +8,7 @@ RUN npm i
 
 COPY --chown=node:node . .
 
-RUN npm build
+RUN npm run build
 
 CMD ["npm", "run", "start"]
 
