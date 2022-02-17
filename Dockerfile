@@ -1,17 +1,15 @@
-FROM node:16-alpine
+FROM node:14.17.3-alpine
 
 WORKDIR /usr/app
 
-COPY package.json ./
+COPY package*.json ./
 
-RUN npm install
+RUN npm i
 
-RUN npm install pm2 -g
+COPY --chown=node:node . .
 
-COPY . .
+RUN npm build
 
-RUN npm run build
-
-CMD ["pm2-runtime", "dist/shared/infra/http/server.js"]
+CMD ["npm", "run", "start"]
 
 
