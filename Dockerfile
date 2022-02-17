@@ -2,18 +2,18 @@ FROM node:16-alpine
 
 WORKDIR /usr/app
 
-COPY package*.json ./
-
-RUN corepack enable
-
 RUN npm i -g corepack
 
-RUN yarn
+COPY package*.json ./
+
+RUN yarn 
 
 COPY --chown=node:node . .
 
+EXPOSE 3333
+
 RUN yarn build
 
-CMD ["yarn", "start"]
+CMD ["node", "./dist/shared/infra/http/server.js"]
 
 
