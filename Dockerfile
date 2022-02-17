@@ -1,15 +1,19 @@
-FROM node:14.17.3-alpine
+FROM node:16-alpine
 
 WORKDIR /usr/app
 
 COPY package*.json ./
 
-RUN npm i --production
+RUN corepack enable
+
+RUN npm i -g corepack
+
+RUN yarn isntall
 
 COPY --chown=node:node . .
 
 RUN npm run build
 
-CMD ["npm", "run", "start"]
+CMD ["yarn", "start"]
 
 
