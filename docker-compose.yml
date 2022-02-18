@@ -23,4 +23,5 @@ services:
       - app-networks
 
 networks:
-  - app-networks
+  app-networks:
+    name: app-networks
