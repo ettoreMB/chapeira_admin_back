@@ -13,7 +13,7 @@ services:
     expose:
       - "80"
       - "443"
-    enviroment:
+    environment:
       - VIRTUAL_HOST= chapeira.wfbtecnologia
       - LETSENCRYPT_HOST= chapeira.wfbtecnologia
       - LETSENCRYPT_EMAIL= ettore.barbosa@gmail.com
@@ -50,22 +50,23 @@ services:
       - "nginx-vhost:/etc/nginx/vhost.d"
       - "html:/usr/share/nginx/html"
       - "certs:/etc/nginx/certs:ro"
-    letsencrypt_nginx_proxy_companion:
-      image: jrcs/letsencrypt-nginx-proxy-companion
-      restart: always
-      container_name: letsencrypt-nginx-proxy-companion
-      volumes:
-        - "/var/run/docker.sock:/var/run/docker.sock:ro"
-        - "nginx-conf:/etc/nginx/conf.d"
-        - "nginx-vhost:/etc/nginx/vhost.d"
-        - "html:/usr/share/nginx/html"
-        - "certs:/etc/nginx/certs:rw"
-      depends_on:
-        - nginx_proxy
+
+  letsencrypt_nginx_proxy_companion:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    restart: always
+    container_name: letsencrypt-nginx-proxy-companion
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "nginx-conf:/etc/nginx/conf.d"
+      - "nginx-vhost:/etc/nginx/vhost.d"
+      - "html:/usr/share/nginx/html"
+      - "certs:/etc/nginx/certs:rw"
+    depends_on:
+      - nginx_proxy
 networks:
   app-networks:
-    external:
-      name: app-networks
+    name: app-networks
+
 volumes:
   nginx-conf:
   nginx-vhost:
