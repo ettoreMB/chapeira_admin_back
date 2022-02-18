@@ -13,67 +13,61 @@ services:
     expose:
       - "80"
       - "443"
-    environment:
-      VIRTUAL_HOST: chapeira.wfbtecnologia
-      LETSENCRYPT_HOST: chapeira.wfbtecnologia
-      LETSENCRYPT_EMAIL: ettore.barbosa@gmail.com
+    enviroment:
+      - VIRTUAL_HOST= chapeira.wfbtecnologia
+      - LETSENCRYPT_HOST= chapeira.wfbtecnologia
+      - LETSENCRYPT_EMAIL= ettore.barbosa@gmail.com
     networks:
       - app-networks
 
   nginx:
     container_name: server-nginx
+    restart: always
     build: ./nginx-proxy
-    restart: unless-stopped
-    ports:
-      - "80:80"
+    environment:
+      - VIRTUAL_HOST= chapeira.wfbtecnologia
+      - LETSENCRYPT_HOST= chapeira.wfbtecnologia
+      - LETSENCRYPT_EMAIL= ettore.barbosa@gmail.com
     expose:
       - "80"
       - "443"
-    environment:
-      VIRTUAL_HOST: chapeira.wfbtecnologia
-      LETSENCRYPT_HOST: chapeira.wfbtecnologia
-      LETSENCRYPT_EMAIL: ettore.barbosa@gmail.com
-    depends_on:
-      - app
     networks:
       - app-networks
 
   nginx-proxy:
-    image: jwilder/nginx-proxy
+    image: jwilder/nginx-proxy:alpine
     restart: "always"
-    labels:
-      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
     ports:
       - "80:80"
       - "443:443"
+    networks:
+      - app-networks
+    labels:
+      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - nginx-conf:/etc/nginx/conf.d
-      - nginx-certs:/etc/nginx/certs:ro
-      - nginx-vhost:/etc/nginx/vhost.d
-      - nginx-html:/usr/share/nginx/html
-    networks:
-      - app-networks
-  nginx-proxy-letsencrypt:
-    restart: "always"
-    image: jrcs/letsencrypt-nginx-proxy-companion:2.1
-    volumes:
-      - nginx-conf:/etc/nginx/conf.d
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - nginx-certs:/etc/nginx/certs:rw
-      - nginx-vhost:/etc/nginx/vhost.d
-      - nginx-html:/usr/share/nginx/html
-    networks:
-      - app-networks
-
-volumes:
-  lumes:
-  nginx-certs:
-  nginx-vhost:
-  nginx-conf:
-  nginx-html:
-  static_volume:
-
+      - "nginx-conf:/etc/nginx/conf.d"
+      - "nginx-vhost:/etc/nginx/vhost.d"
+      - "html:/usr/share/nginx/html"
+      - "certs:/etc/nginx/certs:ro"
+    letsencrypt_nginx_proxy_companion:
+      image: jrcs/letsencrypt-nginx-proxy-companion
+      restart: always
+      container_name: letsencrypt-nginx-proxy-companion
+      volumes:
+        - "/var/run/docker.sock:/var/run/docker.sock:ro"
+        - "nginx-conf:/etc/nginx/conf.d"
+        - "nginx-vhost:/etc/nginx/vhost.d"
+        - "html:/usr/share/nginx/html"
+        - "certs:/etc/nginx/certs:rw"
+      depends_on:
+        - nginx_proxy
 networks:
   app-networks:
-    name: app-networks
+    external:
+      name: app-networks
+volumes:
+  nginx-conf:
+  nginx-vhost:
+  html:
+  certs:
