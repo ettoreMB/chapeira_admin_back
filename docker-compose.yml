@@ -13,7 +13,7 @@ services:
     expose:
       - "80"
       - "443"
-    enviroment:
+    environment:
       VIRTUAL_HOST: chapeira.wfbtecnologia
       LETSENCRYPT_HOST: chapeira.wfbtecnologia
       LETSENCRYPT_EMAIL: ettore.barbosa@gmail.com
@@ -29,7 +29,7 @@ services:
     expose:
       - "80"
       - "443"
-    enviroment:
+    environment:
       VIRTUAL_HOST: chapeira.wfbtecnologia
       LETSENCRYPT_HOST: chapeira.wfbtecnologia
       LETSENCRYPT_EMAIL: ettore.barbosa@gmail.com
