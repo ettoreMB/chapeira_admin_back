@@ -1,19 +1,19 @@
 FROM node:16-alpine
 
-WORKDIR /usr/app
+ENV YARN_VERSION 1.22.17
 
-RUN npm i -g corepack
+WORKDIR /usr/app
 
 COPY package*.json ./
 
 RUN yarn 
 
-COPY --chown=node:node . .
-
-EXPOSE 3333
+COPY . .
 
 RUN yarn build
 
-CMD ["node", "./dist/shared/infra/http/server.js"]
+EXPOSE 3333
+
+CMD npm run start
 
 
