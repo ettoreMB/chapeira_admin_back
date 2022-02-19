@@ -14,25 +14,11 @@ services:
       - "80"
       - "443"
     environment:
-      - VIRTUAL_HOST= chapeira.wfbtecnologia
-      - LETSENCRYPT_HOST= chapeira.wfbtecnologia
+      - VIRTUAL_HOST= chapeira.wfbtecnologia.com
+      - LETSENCRYPT_HOST= chapeira.wfbtecnologia.com
       - LETSENCRYPT_EMAIL= ettore.barbosa@gmail.com
     networks:
-      - app-networks
-
-  nginx:
-    container_name: server-nginx
-    restart: always
-    build: ./nginx-proxy
-    environment:
-      - VIRTUAL_HOST= chapeira.wfbtecnologia
-      - LETSENCRYPT_HOST= chapeira.wfbtecnologia
-      - LETSENCRYPT_EMAIL= ettore.barbosa@gmail.com
-    expose:
-      - "80"
-      - "443"
-    networks:
-      - app-networks
+      - nginx-proxy
 
   nginx-proxy:
     image: jwilder/nginx-proxy:alpine
@@ -41,20 +27,18 @@ services:
       - "80:80"
       - "443:443"
     networks:
-      - app-networks
+      - nginx-proxy
     labels:
       - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - "nginx-conf:/etc/nginx/conf.d"
-      - "nginx-vhost:/etc/nginx/vhost.d"
-      - "html:/usr/share/nginx/html"
-      - "certs:/etc/nginx/certs:ro"
+      - nginx-conf:/etc/nginx/conf.d
+      - nginx-vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - certs:/etc/nginx/certs:ro
 
   letsencrypt_nginx_proxy_companion:
     image: jrcs/letsencrypt-nginx-proxy-companion
-    restart: always
-    container_name: letsencrypt-nginx-proxy-companion
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "nginx-conf:/etc/nginx/conf.d"
@@ -62,11 +46,10 @@ services:
       - "html:/usr/share/nginx/html"
       - "certs:/etc/nginx/certs:rw"
     depends_on:
-      - nginx_proxy
+      - nginx-proxy
 networks:
-  app-networks:
-    name: app-networks
-
+  nginx-proxy:
+    name: proxy_nginx-proxy
 volumes:
   nginx-conf:
   nginx-vhost:
