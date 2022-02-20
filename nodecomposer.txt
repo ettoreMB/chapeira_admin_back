@@ -1,0 +1,9 @@
+  # app:
+  #   build: .
+  #   working_dir: /usr/app
+  #   container_name: chapeira_admin_back
+  #   restart: always
+  #   volumes:
+  #     - .:/user/app
+  #   depends_on:
+  #     - app-network
