@@ -37,7 +37,7 @@ services:
       - "443"
     environment:
       - VIRTUAL_HOST=chapeira.wfbtecnologia.com.br
-      - VIRTUAL_PORT=3333
+      - VIRTUAL_PORT=8181
       - LETSENCRYPT_HOST=chapeira.wfbtecnologia.com.br
       - LETSENCRYPT_EMAIL=ettore.barbosa@gmail.com
     build: ./nginx-proxy
