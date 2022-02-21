@@ -1,52 +1,22 @@
 version: "3.9"
 
 services:
-  chapeira_api:
+  app:
     build: .
     working_dir: /usr/app
-    container_name: chapeira_api
-    image: chapeira_api
-    restart: unless-stopped
-    networks:
-      - app-network
-
-  web-server:
-    image: nginx:mainline-alpine
-    container_name: web_server
-    restart: unless-stopped
-    ports:
-      - "80:80"
+    container_name: chapeira_admin_back
+    restart: always
+    expose:
+      - "80"
+      - "443"
     volumes:
-      - web-root:/var/www/html
-      - ./nginx-conf:/etc/nginx/conf.d
-      - certbot-etc:/etc/letsencrypt
-      - certbot-var:/var/lib/letsencrypt
-    depends_on:
-      - chapeira_api
-    networks:
-      - app-network
-
-  certbot:
-    image: certbot/certbot
-    container_name: certbot
-    volumes:
-      - certbot-etc:/etc/letsencrypt
-      - certbot-var:/var/lib/letsencrypt
-      - web-root:/var/www/html
-    depends_on:
-      - webserver
-    command: certonly --webroot --webroot-path=/var/www/html --email ettore.barbosa@gmail.com --agree-tos --no-eff-email --staging -d chapeira.wfbtecnologia.com.br  -d www.chapeira.wfbtecnologia.com.br
-
-volumes:
-  certbot-etc:
-  certbot-var:
-  web-root:
-    driver: local
-    driver_opts:
-      type: none
-      device: /home/ettore/app/
-      o: bind
+      - .:/user/app
+    environment:
+      - VIRTUAL_HOST=chapeira.wfbtecnologia.com.br
+      - VIRTUAL_PORT=3333
+      - LETSENCRYPT_HOST=chapeira.wfbtecnologia.com.br
+      - LETSENCRYPT_EMAIL=ettore.barbosa@gmail.com
 
 networks:
-  app-network:
-    driver: bridge
+  external:
+    name: nginx-proxy
