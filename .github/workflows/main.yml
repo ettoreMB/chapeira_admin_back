@@ -44,5 +44,4 @@ jobs:
           key: ${{ secrets.SSH_KEY }} 
           script: |
             cd ~/app/chapeira_admin_back
-            yarn
-            pm2 restart chapeira
+            docker-compose up -d --build
