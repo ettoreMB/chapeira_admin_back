@@ -10,7 +10,7 @@ class ListStoreController {
 
     const allstores = await listStoresUseCase.execute();
 
-    return res.send(JSON.stringify(allstores));
+    return res.json(allstores);
   }
 }
 
