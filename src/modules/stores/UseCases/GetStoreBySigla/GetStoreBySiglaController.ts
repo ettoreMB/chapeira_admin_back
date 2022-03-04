@@ -11,7 +11,7 @@ class GetStoreBySiglaController {
 
     const store = await getStoreBySigla.execute(Loja_Sigla);
 
-    return res.send(JSON.stringify(store));
+    return res.status(200).json(store);
   }
 }
 
