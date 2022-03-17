@@ -10,10 +10,8 @@ RUN yarn
 
 COPY . .
 
-RUN yarn build
-
 EXPOSE 3333
 
-CMD npm run start
+CMD npm run dev
 
 
