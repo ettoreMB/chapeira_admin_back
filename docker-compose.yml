@@ -6,51 +6,52 @@ services:
     working_dir: /usr/app
     container_name: chapeira_admin_back
     restart: always
-    environment:
-      - VIRTUAL_HOST=chapeira.wfbtecnologia.com.br
-      - VIRTUAL_PORT=3333
-      - LETSENCRYPT_HOST=chapeira.wfbtecnologia.com.br
-      - LETSENCRYPT_EMAIL=ettore.barbosa@gmail.com
+    # environment:
+    #   - VIRTUAL_HOST=chapeira.wfbtecnologia.com.br
+    #   - VIRTUAL_PORT=3333
+    #   - LETSENCRYPT_HOST=chapeira.wfbtecnologia.com.br
+    #   - LETSENCRYPT_EMAIL=ettore.barbosa@gmail.com
     volumes:
       - .:/user/app
-    networks:
-      - nginx-proxy
-  nginx-proxy:
-    image: jwilder/nginx-proxy:alpine
-    container_name: nginxproxy
-    restart: "always"
-    labels:
-      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-      - nginx-conf:/etc/nginx/conf.d
-      - nginx-certs:/etc/nginx/certs:ro
-      - nginx-vhost:/etc/nginx/vhost.d
-      - nginx-html:/usr/share/nginx/html
-    networks:
-      - nginx-proxy
-  nginx-proxy-letsencrypt:
-    restart: "always"
-    image: jrcs/letsencrypt-nginx-proxy-companion
-    container_name: letsencrypt-nginx-proxy-companion
-    volumes:
-      - nginx-conf:/etc/nginx/conf.d
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - nginx-certs:/etc/nginx/certs:rw
-      - nginx-vhost:/etc/nginx/vhost.d
-      - nginx-html:/usr/share/nginx/html
-    depends_on:
-      - nginx-proxy
 
-volumes:
-  nginx-certs:
-  nginx-vhost:
-  nginx-conf:
-  nginx-html:
+#     networks:
+#       - nginx-proxy
+#   nginx-proxy:
+#     image: jwilder/nginx-proxy:alpine
+#     container_name: nginxproxy
+#     restart: "always"
+#     labels:
+#       - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
+#     ports:
+#       - "80:80"
+#       - "443:443"
+#     volumes:
+#       - /var/run/docker.sock:/tmp/docker.sock:ro
+#       - nginx-conf:/etc/nginx/conf.d
+#       - nginx-certs:/etc/nginx/certs:ro
+#       - nginx-vhost:/etc/nginx/vhost.d
+#       - nginx-html:/usr/share/nginx/html
+#     networks:
+#       - nginx-proxy
+#   nginx-proxy-letsencrypt:
+#     restart: "always"
+#     image: jrcs/letsencrypt-nginx-proxy-companion
+#     container_name: letsencrypt-nginx-proxy-companion
+#     volumes:
+#       - nginx-conf:/etc/nginx/conf.d
+#       - /var/run/docker.sock:/var/run/docker.sock:ro
+#       - nginx-certs:/etc/nginx/certs:rw
+#       - nginx-vhost:/etc/nginx/vhost.d
+#       - nginx-html:/usr/share/nginx/html
+#     depends_on:
+#       - nginx-proxy
 
-networks:
-  nginx-proxy:
-    name: nginx-proxy
+# volumes:
+#   nginx-certs:
+#   nginx-vhost:
+#   nginx-conf:
+#   nginx-html:
+
+# networks:
+#   nginx-proxy:
+#     name: nginx-proxy
