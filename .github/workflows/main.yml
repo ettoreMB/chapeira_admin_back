@@ -20,7 +20,7 @@ jobs:
           node-version: 14.x
           
       - name: Install Dependencies
-        run: npm i
+        run: npm install
         
       - name: Build
         run: npm run build
@@ -43,5 +43,5 @@ jobs:
           key: ${{ secrets.SSH_KEY }} 
           script: |
             cd ~/app/chapeira_admin_back
-            npm i 
+            npm install
             pm2 restart chapeira
