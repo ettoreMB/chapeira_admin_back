@@ -5,6 +5,8 @@ services:
     build: .
     working_dir: /usr/app
     container_name: chapeira_admin_back
+    expose:
+      - 3333
     restart: always
     # environment:
     #   - VIRTUAL_HOST=chapeira.wfbtecnologia.com.br
