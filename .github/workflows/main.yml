@@ -43,6 +43,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }} 
           script: |
             cd ~/app/chapeira_admin_back
-            npm install
+            npm i
             pm2 restart chapeira
           
