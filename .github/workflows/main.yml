@@ -42,6 +42,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }} 
           script: |
+            exec bash \-l
             cd ~/app/chapeira_admin_back
             npm i
             pm2 restart chapeira
