@@ -62,21 +62,21 @@ class ImportInvoiceUseCase {
         Data_Vencimento,
       } = invoice;
 
-      console.log(invoice)
-      // const existsInvoice = await this.InvoiceRepository.findByNumber(
-      //   Nota_Fiscal
-      // );
 
-      // if (!existsInvoice) {
-      //   await this.InvoiceRepository.create({
-      //     Loja_Sigla,
-      //     Nota_Fiscal,
-      //     Valor_Servicos,
-      //     Valor_Nota,
-      //     Data_Faturamento,
-      //     Data_Vencimento,
-      //   });
-      // }
+      const existsInvoice = await this.InvoiceRepository.findByNumber(
+        Nota_Fiscal
+      );
+
+      if (!existsInvoice) {
+        await this.InvoiceRepository.create({
+          Loja_Sigla,
+          Nota_Fiscal,
+          Valor_Servicos,
+          Valor_Nota,
+          Data_Faturamento,
+          Data_Vencimento,
+        });
+      }
     });
   }
 }
