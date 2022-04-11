@@ -11,8 +11,8 @@ const createUserController = new CreateUserController();
 const getUsersController = new GetUsersbyStoreController();
 const updateAdminController = new UpdateAdminController();
 
-usersRoutes.get("/:id", updateAdminController.handle)
+usersRoutes.get("/update/:id", updateAdminController.handle)
 usersRoutes.post("/", createUserController.handle);
-usersRoutes.get("/", getUsersController.handle);
+usersRoutes.get("/:sigla", getUsersController.handle);
 
 export { usersRoutes };

@@ -4,6 +4,7 @@ import { inject, injectable } from "tsyringe";
 
 interface IRequest {
   sigla: string
+  universe: number
 }
 
 @injectable()
@@ -13,8 +14,8 @@ class GetUsersBySiglaUseCase {
     private usersRepository: IUsersRepository,
   ) { }
 
-  async execute({ sigla }: IRequest): Promise<User[]> {
-    const users = this.usersRepository.getAllBySigla(sigla);
+  async execute({ sigla, universe }: IRequest): Promise<User[]> {
+    const users = this.usersRepository.getAllBySigla(sigla, universe);
     return users
   }
 }

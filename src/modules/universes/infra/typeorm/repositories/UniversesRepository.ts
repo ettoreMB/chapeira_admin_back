@@ -10,6 +10,10 @@ class UniversesRepository implements IUniversesRepository {
   constructor() {
     this.repository = getRepository(Universe);
   }
+  async findBySigla(sigla: string): Promise<Universe[]> {
+    const universes = await this.repository.find({ Loja_Sigla: sigla });
+    return universes
+  }
 
   async create({
     Loja_Sigla,

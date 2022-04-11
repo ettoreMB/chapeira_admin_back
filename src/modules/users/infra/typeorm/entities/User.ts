@@ -11,7 +11,6 @@ import { v4 as uuidV4 } from "uuid";
 class User {
   @PrimaryGeneratedColumn()
   id: number;
-
   @Column()
   id_Key: string;
 
@@ -23,6 +22,9 @@ class User {
 
   @Column()
   Nome: string;
+
+  @Column()
+  Funcao_Sigla: string;
 
   @Column()
   Funcao: string;
@@ -61,6 +63,12 @@ class User {
   Observacao: string;
 
   @Column()
+  Jornada_Sigla: string;
+
+  @Column()
+  Status: string;
+
+  @Column()
   CheckIn: number;
 
   @Column()
@@ -77,9 +85,6 @@ class User {
 
   @Column()
   CheckIn_Session: string;
-
-  @Column()
-  Status: string;
 
   @Column()
   Ativo: string;
@@ -110,18 +115,17 @@ class User {
       this.id_Key = uuidV4();
     }
 
-    if (!this.Administrador) {
-      this.Administrador = "Sim";
-    }
+    // if (!this.Administrador) {
+    //   this.Administrador = "Sim";
+    // }
 
-    if (!this.Tipo) {
-      this.Tipo = "Colaborador";
-    }
+    // if (!this.Tipo) {
+    //   this.Tipo = "Colaborador";
+    // }
 
-    if (!this.Status) {
-      this.Status = "Nao";
-    }
-
+    // if (!this.Status) {
+    //   this.Status = "Nao";
+    // }
 
   }
 }
