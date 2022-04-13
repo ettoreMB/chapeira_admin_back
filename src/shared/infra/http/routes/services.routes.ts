@@ -1,10 +1,12 @@
+import { GetServicesByStoreController } from "@modules/users/UseCases/GetServicesByStore/GetServicesByStoreController";
+import { GetServicesByStoreUseCase } from "@modules/users/UseCases/GetServicesByStore/GetServicesByStoreUseCase";
 import { Router } from "express";
+import { container } from "tsyringe";
 
 const servicesRoutes = Router();
 
-servicesRoutes.get("/:sigla", (req, res) => {
-  const { sigla } = req.params;
-  res.send('Hi',)
-})
+const serviceWorkesController = new GetServicesByStoreController();
+
+servicesRoutes.get("/:sigla", serviceWorkesController.handle);
 
 export { servicesRoutes };

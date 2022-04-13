@@ -17,7 +17,7 @@ const editStoreController = new EditStoreController();
 const storesDashBoardController = new StoreDashBoardController();
 const storeDashBoardBySiglaUseCase = new StoreDashBoardBySiglaController();
 
-storeRoutes.post("/", createStoreController.handle);
+storeRoutes.post("/create", createStoreController.handle);
 storeRoutes.get("/", listStoresController.handle);
 storeRoutes.get("/dashboard", storesDashBoardController.handle);
 storeRoutes.get("/dashboard/:sigla", storeDashBoardBySiglaUseCase.handle);

@@ -1,5 +1,5 @@
 
-import { CreateUserController } from "@modules/users/UseCases/CreateUse/CreateUserController";
+import { CreateUserController } from "@modules/users/UseCases/CreateUser/CreateUserController";
 import { GetUsersbyStoreController } from "@modules/users/UseCases/GetUsersByStore/GetUsersbyStoreController";
 import { UpdateAdminController } from "@modules/users/UseCases/UpdateAdmin/UpdateAdminController";
 
