@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { authorizationRouter } from "./authorization.routes";
 
 import { invoiceRoutes } from "./invoices.routes";
 import { servicesRoutes } from "./services.routes";
@@ -20,5 +21,7 @@ router.use("/users", usersRoutes);
 router.use("/visitors", visitorsRoutes);
 
 router.use("/services", servicesRoutes);
+
+router.use("/auth", authorizationRouter);
 
 export { router };
