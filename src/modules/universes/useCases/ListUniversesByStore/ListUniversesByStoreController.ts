@@ -6,6 +6,7 @@ import { ListUniversesByStoreUseCase } from "./ListUniversesByStoreUseCase";
 class ListUniversesByStoreController {
   async handle(req: Request, res: Response): Promise<Response> {
     const { sigla: Loja_Sigla } = req.params;
+
     const listUniversesRepository = container.resolve(
       ListUniversesByStoreUseCase
     );

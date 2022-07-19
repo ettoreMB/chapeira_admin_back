@@ -12,6 +12,7 @@ class StoresRepository implements IStoresRepository {
     this.repository = getRepository(Store);
   }
 
+
   async delete(Loja_Sigla: string): Promise<void> {
     const store = await this.repository.findOne({ Loja_Sigla });
     await this.repository.remove(store);
@@ -82,14 +83,13 @@ class StoresRepository implements IStoresRepository {
 
   }
 
-
   async list(): Promise<Store[]> {
     const stores = await this.repository.find();
     return stores;
   }
 
   async findByName(Loja: string): Promise<Store> {
-    const store = await this.repository.findOne({ Loja });
+    const store = await this.repository.findOne({ Pasta_WEB: Loja });
 
     return store;
   }
@@ -100,14 +100,21 @@ class StoresRepository implements IStoresRepository {
     return store;
   }
 
+  async findBySigla(Loja_Sigla?: string, Loja_nome?: string): Promise<any> {
 
-  async findBySigla(Loja_Sigla: string): Promise<Store> {
-    const store = await this.repository.findOne({
-      where: { Loja_Sigla },
-      relations: ["invoices"],
-    });
-
-    return store;
+    if (Loja_Sigla) {
+      const store = await this.repository.findOne({
+        where: { Loja_Sigla },
+      });
+      return store
+    }
+    if (Loja_nome) {
+      const store = await this.repository.findOne({
+        where: { Pasta_WEB: Loja_nome },
+      })
+      return store
+    }
+    return []
   }
 
   async findById(id: number): Promise<Store> {

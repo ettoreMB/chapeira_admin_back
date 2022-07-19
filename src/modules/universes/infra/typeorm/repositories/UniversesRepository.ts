@@ -29,10 +29,16 @@ class UniversesRepository implements IUniversesRepository {
     return universe;
   }
 
-  async findById(id: number): Promise<Universe> {
-    const universe = await this.repository.findOne({ id });
+  async findBySigla(sigla: string): Promise<Universe[]> {
+    const universes = await this.repository.find(
+      {
+        where: { Loja_Sigla: sigla },
+        select: ["Loja_Sigla", "Universo", "id", "Zona", "Andar"]
+      },
 
-    return universe;
+    );
+
+    return universes;
   }
 }
 

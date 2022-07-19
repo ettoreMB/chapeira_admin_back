@@ -101,7 +101,7 @@ class Store {
   Update_Date: Date;
 
   @Column()
-  Update_User: Date;
+  Update_User: string;
 
   @OneToMany(() => Invoice, (invoice) => invoice.storeInvoices)
   invoices: Invoice[];

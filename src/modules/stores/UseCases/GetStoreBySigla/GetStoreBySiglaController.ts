@@ -5,11 +5,14 @@ import { GetStoreBySiglaUseCase } from "./GetStoreBySiglaUseCase";
 
 class GetStoreBySiglaController {
   async handle(req: Request, res: Response): Promise<Response> {
-    const { sigla: Loja_Sigla } = req.params;
+    const { sigla, nome } = req.query;
 
     const getStoreBySigla = container.resolve(GetStoreBySiglaUseCase);
 
-    const store = await getStoreBySigla.execute(Loja_Sigla);
+    const store = await getStoreBySigla.execute({
+      Loja_Sigla: sigla as string,
+      Loja_Nome: nome as string
+    });
 
     return res.status(200).json(store);
   }

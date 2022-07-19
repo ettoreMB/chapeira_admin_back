@@ -1,6 +1,6 @@
 interface ICreateUserDTO {
   Loja_Sigla: string;
-  id_Universo: number;
+  Id_Universo: number;
   Nome: string;
   Funcao: string;
   Email: string;

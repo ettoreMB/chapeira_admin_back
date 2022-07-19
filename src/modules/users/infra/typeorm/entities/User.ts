@@ -13,16 +13,19 @@ class User {
   id: number;
 
   @Column()
-  id_Key: string;
+  Id_Key: string;
 
   @Column()
   Loja_Sigla: string;
 
   @Column()
-  id_Universo: number;
+  Id_Universo: number;
 
   @Column()
   Nome: string;
+
+  @Column()
+  Funcao_Sigla: string;
 
   @Column()
   Funcao: string;
@@ -88,13 +91,19 @@ class User {
   Administrador: string;
 
   @Column()
-  Senha: string;
-
-  @CreateDateColumn()
-  Insert_Date: Date;
+  Jornada_Sigla: string;
 
   @Column()
-  Update_Date: Date;
+  Senha: string;
+
+  @Column()
+  Insert_Date: string;
+
+  @Column()
+  Insert_User: string;
+
+  @Column()
+  Update_Date: string;
 
   @Column()
   Update_User: string;
@@ -105,9 +114,26 @@ class User {
   @Column()
   Cor: string;
 
+  // @Column({select: false})
+  // Qtd_Colaborador: number;
+  // @Column({select: false})
+  // Qtd_Brigadista: number;
+  // @Column({select: false})
+  // Qtd_Nao_Brigadista: number;
+  // @Column({select: false})
+  // Qtd_Terceiro: number;
+  // @Column({select: false})
+  // Qtd_Visitante: number;
+  // @Column({select: false})
+  // Qtd_Presente: number;
+  // @Column({select: false})
+  // Qtd_Ausente: number;
+  // @Column({select: false})
+  // Qtd_Ativo: number;
+
   constructor() {
-    if (!this.id_Key) {
-      this.id_Key = uuidV4();
+    if (!this.Id_Key) {
+      this.Id_Key = uuidV4();
     }
 
     if (!this.Administrador) {

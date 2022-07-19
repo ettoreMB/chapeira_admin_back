@@ -8,6 +8,6 @@ const createUniverseController = new CreateUniverseController();
 const listUniversesBySiglaController = new ListUniversesByStoreController();
 
 universesRoutes.post("/", createUniverseController.handle);
-universesRoutes.get("/", listUniversesBySiglaController.handle);
+universesRoutes.get("/:sigla", listUniversesBySiglaController.handle);
 
 export { universesRoutes };

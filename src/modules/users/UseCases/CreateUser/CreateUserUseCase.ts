@@ -20,7 +20,7 @@ class CreateUserUseCase {
 
   async execute({
     Loja_Sigla,
-    id_Universo,
+    Id_Universo,
     Nome,
     Funcao,
     Email,
@@ -29,14 +29,14 @@ class CreateUserUseCase {
   }: ICreateUserDTO): Promise<User> {
 
     const store = await this.storesRepository.findBySigla(Loja_Sigla);
-    const universe = await this.universesRepository.findById(id_Universo);
+    const universe = await this.universesRepository.findBySigla(Loja_Sigla);
 
     if (!store) throw new AppErrors('Store does not Exists');
     if (!universe) throw new AppErrors('Universe Does Not Exists')
 
     const user = await this.usersRepository.create({
       Loja_Sigla,
-      id_Universo,
+      Id_Universo,
       Nome,
       Funcao,
       Email,
